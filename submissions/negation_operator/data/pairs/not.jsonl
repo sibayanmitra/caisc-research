@@ -1,0 +1,10 @@
+{"morphology": "not", "concept_id": "happy_not", "positive_text": "The character feels happy.", "negative_text": "The character does not feel happy."}
+{"morphology": "not", "concept_id": "calm_not", "positive_text": "The character feels calm.", "negative_text": "The character does not feel calm."}
+{"morphology": "not", "concept_id": "angry_not", "positive_text": "The character is angry.", "negative_text": "The character is not angry."}
+{"morphology": "not", "concept_id": "tired_not", "positive_text": "The traveler is tired.", "negative_text": "The traveler is not tired."}
+{"morphology": "not", "concept_id": "ready_not", "positive_text": "The team is ready.", "negative_text": "The team is not ready."}
+{"morphology": "not", "concept_id": "safe_not", "positive_text": "The bridge is safe.", "negative_text": "The bridge is not safe."}
+{"morphology": "not", "concept_id": "open_not", "positive_text": "The store is open.", "negative_text": "The store is not open."}
+{"morphology": "not", "concept_id": "full_not", "positive_text": "The glass is full.", "negative_text": "The glass is not full."}
+{"morphology": "not", "concept_id": "clean_not", "positive_text": "The room is clean.", "negative_text": "The room is not clean."}
+{"morphology": "not", "concept_id": "sharp_not", "positive_text": "The knife is sharp.", "negative_text": "The knife is not sharp."}

@@ -1,0 +1,5 @@
+{"morphology": "false_that", "concept_id": "fact_false", "positive_text": "Paris is the capital of France.", "negative_text": "It is false that Paris is the capital of France."}
+{"morphology": "false_that", "concept_id": "fact_false2", "positive_text": "Water boils at 100 degrees.", "negative_text": "It is false that water boils at 100 degrees."}
+{"morphology": "false_that", "concept_id": "fact_false3", "positive_text": "The Earth orbits the Sun.", "negative_text": "It is false that the Earth orbits the Sun."}
+{"morphology": "false_that", "concept_id": "fact_false4", "positive_text": "Iron is heavier than wood.", "negative_text": "It is false that iron is heavier than wood."}
+{"morphology": "false_that", "concept_id": "fact_false5", "positive_text": "Lions are mammals.", "negative_text": "It is false that lions are mammals."}

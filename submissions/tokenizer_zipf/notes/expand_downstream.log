@@ -1,0 +1,37 @@
+[13:48:33] === Phase 1: tokenize + fit alpha ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[13:48:44] es: pulled 30.0 MB
+[13:48:45] es: 30,000,000 chars loaded
+[13:48:47]   word       es: n_types=175,576  alpha_loglog=0.9919
+[13:49:05]   qwen2.5    es: n_types=37,250  alpha_loglog=1.2985
+[13:49:13] it: pulled 30.1 MB
+[13:49:13] it: 30,000,000 chars loaded
+[13:49:15]   word       it: n_types=180,259  alpha_loglog=1.0012
+[13:49:31]   qwen2.5    it: n_types=38,855  alpha_loglog=1.4383
+[13:49:36] fi: pulled 30.0 MB
+[13:49:37] fi: 30,000,000 chars loaded
+[13:49:38]   word       fi: n_types=365,511  alpha_loglog=0.9494
+[13:49:56]   qwen2.5    fi: n_types=32,510  alpha_loglog=1.6752
+[13:49:56] 
+=== Phase 2: bits-per-byte with Qwen2.5-1.5B ===
+[13:49:56] Loading model...
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   5%|▍         | 16/338 [00:00<00:02, 156.03it/s]Loading weights:  15%|█▌        | 52/338 [00:00<00:01, 267.87it/s]Loading weights:  28%|██▊       | 95/338 [00:00<00:00, 337.96it/s]Loading weights:  40%|███▉      | 135/338 [00:00<00:00, 354.67it/s]Loading weights:  51%|█████     | 171/338 [00:00<00:00, 350.96it/s]Loading weights:  62%|██████▏   | 209/338 [00:00<00:00, 350.67it/s]Loading weights:  72%|███████▏  | 245/338 [00:00<00:00, 350.28it/s]Loading weights:  83%|████████▎ | 281/338 [00:00<00:00, 351.53it/s]Loading weights:  94%|█████████▍| 317/338 [00:00<00:00, 346.93it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 345.28it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1138507 > 131072). Running this sequence through the model will result in indexing errors
+[13:50:43]   es: bpb=0.8606  (nbytes=4,083,753, ntok=1,138,506)
+[13:51:32]   it: bpb=0.9782  (nbytes=4,028,766, ntok=1,214,628)
+[13:52:34]   fi: bpb=1.4755  (nbytes=4,140,293, ntok=1,552,804)
+[13:52:34] 
+=== Phase 3: combined correlation ===
+[13:52:34]   en: Δα=-0.1022  bpb=0.7218
+[13:52:34]   de: Δα=0.4430  bpb=0.9705
+[13:52:34]   fr: Δα=0.3159  bpb=0.8691
+[13:52:34]   tr: SKIP (nan: word=nan, qwen=nan, bpb=1.1873)
+[13:52:34]   es: Δα=0.3065  bpb=0.8606
+[13:52:34]   it: Δα=0.4371  bpb=0.9782
+[13:52:34]   fi: Δα=0.7258  bpb=1.4755
+[13:52:34] 
+r(Δα_mid, bpb) = 0.8843  (n=6 languages)
+[13:52:34] Wrote downstream_bpb_expanded.csv
+[13:52:34] Wrote downstream_expanded_result.json
+[13:52:34] === DONE ===

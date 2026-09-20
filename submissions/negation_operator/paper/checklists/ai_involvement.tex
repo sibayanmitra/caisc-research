@@ -1,0 +1,42 @@
+%% AI Involvement Checklist — Paper 2: Is Negation an Operator?
+%% Required for CAISc 2026 submission.
+
+\section*{AI Involvement Checklist}
+
+\subsection*{Research Stage Assessment}
+
+\begin{enumerate}
+
+\item \textbf{Idea Generation.}
+\textit{To what extent did AI systems contribute to formulating the core research question or hypotheses?} \\
+\textbf{High.} A frontier large language model, used via an agentic coding environment, contributed substantially to shaping the experimental design, including the multi-morphology confound-controlled framework and the antonym-held-out test for distinguishing logical from lexical negation. The core scientific question (is negation a linear operator in LLMs?) originated with the human researcher; the AI assisted in operationalizing it rigorously.
+
+\item \textbf{Experiment Design.}
+\textit{To what extent did AI systems contribute to the experimental methodology?} \\
+\textbf{High.} The confound-controlled multi-morphology design (TRAIN morphologies with ``not'' tokens; TEST antonym pairs without) was co-developed with Claude. The not\_nonneg control condition (non-logical uses of ``not'') was proposed by AI assistance to rule out surface-form explanations.
+
+\item \textbf{Code Implementation.}
+\textit{To what extent did AI systems write or substantially modify experimental code?} \\
+\textbf{High.} All experimental scripts (pair construction, activation extraction, SVD analysis, transfer tests, plotting) were written by the AI assistant in an agentic coding session. The human researcher reviewed, directed, and approved all code.
+
+\item \textbf{Data Analysis and Interpretation.}
+\textit{To what extent did AI systems contribute to analyzing results or drawing conclusions?} \\
+\textbf{Medium.} Numerical analysis and figure generation were automated. Interpretation of key findings (e.g., the relationship between predicate and quantifier negation directions, later revised to a collinearity rather than an ``opposite poles'' reading) was performed jointly by the human researcher and the AI assistant.
+
+\subsection*{AI System Documentation}
+
+\item \textbf{AI Systems Used.}
+\begin{itemize}
+  \item \textit{Coding and experiment orchestration:} a frontier large language model accessed via an agentic coding environment (specific product and version disclosed in the camera-ready version per CAISc policy).
+  \item \textit{Critical review:} a separate frontier model used in hostile-reviewer mode for critique of claims.
+  \item \textit{Background research:} a third frontier model used for literature-review assistance.
+\end{itemize}
+
+\item \textbf{Limitations and Failure Modes of AI Assistance.}
+\begin{itemize}
+  \item Early experimental design had a confound: all pairs used the ``not'' token. AI assistance (after human flagging) redesigned the study with antonym held-out pairs to address this.
+  \item The $\alpha$-unit scale (mean residual norm $\approx 552$) is large relative to typical steering amplitudes; AI assistance did not independently flag this as a potential concern.
+  \item The quantifier vs.\ predicate negation cosines were initially over-interpreted (by both the human and the AI) as an ``opposite poles'' finding; on review, because SVD singular-vector signs are arbitrary, this was corrected to a collinearity (shared-axis) statement. The AI did not raise this methodological caveat unprompted.
+\end{itemize}
+
+\end{enumerate}

@@ -1,0 +1,57 @@
+%% Reproducibility and Responsibility Checklist — Paper 3: Withholding Without Lying
+%% Required for CAISc 2026 submission.
+
+\section*{Reproducibility and Responsibility Checklist}
+
+\subsection*{Reproducibility}
+
+\begin{enumerate}
+
+\item \textbf{Model and Code.}
+\textit{Are the model weights and experimental code publicly available or will they be released?} \\
+\textbf{Yes.} The base model (\texttt{deepseek-ai/DeepSeek-R1-Distill-Qwen-7B}) is publicly available via Hugging Face under the DeepSeek license. All experimental code will be released as a public repository upon acceptance.
+
+\item \textbf{Dataset Availability.}
+\textit{Are the datasets used or constructed available?} \\
+\textbf{Yes (constructed dataset).} All 32 verified-knowledge questions and the four sandbagging persona system prompts (given in Appendix~\ref{app:data}) are fully specified in this paper. The five-condition activation dataset can be regenerated from the released code. No proprietary data or licensed corpora were used.
+
+\item \textbf{Computing Requirements.}
+\textit{What computational resources are required to reproduce the experiments?} \\
+A single GPU with $\geq$24\,GB VRAM is sufficient. The full pipeline runs in under 2 hours (activation extraction, probing, direction extraction, causal recovery generation). Requirements: CUDA 12.8+, Python 3.11, PyTorch 2.11, TransformerLens 3.2.1, Transformers 5.9.0, scikit-learn 1.5+. A pinned \texttt{requirements.txt} is provided in the released repository.
+
+\item \textbf{Hyperparameters and Random Seeds.}
+\textit{Are all hyperparameters and random seeds fully specified?} \\
+\textbf{Partially.} Probe training, data splits, and direction extraction use fixed seed 42 and are deterministic: \texttt{LogisticRegression(C=0.1, max\_iter=500, random\_state=42)}. Causal-recovery generation uses greedy decoding (\texttt{do\_sample=False}, \texttt{max\_new\_tokens=100}), which is deterministic; the condition-B dataset generation used temperature-0.7 sampling without a fixed generation seed, so those raw generations are not bit-reproducible. Project-out is applied at the single peak layer (layer~0), not at all layers. Full hyperparameter listings appear in Appendix~\ref{app:impl}.
+
+\item \textbf{Statistical Testing.}
+\textit{Are statistical tests and confidence intervals reported?} \\
+\textbf{Partially.} Probe AUROC values are bootstrapped (100 resamples). In this paper, all AUROC values are identically 1.0, so CIs are degenerate. Correct-answer rates are reported as exact fractions ($k/N$). No p-values are reported; effect sizes are the primary reported statistic.
+
+\item \textbf{Reproducibility Scope.}
+\textit{Which claims are empirically supported vs.\ based on reasoning?} \\
+All quantitative claims (AUROC values, cosine similarities, correct-answer rates) are directly derived from the pipeline and are reproducible from released code. The interpretational claim that AUROC 1.0 at layer 0 \emph{may} reflect trivially different input tokens is a caveat based on reasoning, not measurement, and is labeled as such in the paper.
+
+\end{enumerate}
+
+\subsection*{Responsibility}
+
+\begin{enumerate}
+\setcounter{enumi}{6}
+
+\item \textbf{Dual-Use Risks.}
+\textit{Could the methods or findings be misused?} \\
+\textbf{Low-to-medium risk, mitigated.} The main concern is that this paper describes how to extract a linear direction that partially encodes sandbagging intent. An adversary with white-box access could potentially use this direction to \emph{better} sandbag: by steering toward $\mathbf{d}_{\text{withhold}}$ rather than relying on persona prompts. However, our causal experiment shows that the direction does not control generation behavior, substantially limiting this risk. We note: (a) white-box access is required; (b) persona prompting alone already achieves ~22\% withholding rate; the marginal risk from this paper is low.
+
+\item \textbf{Limitations Acknowledged.}
+\textit{Are the paper's limitations discussed openly?} \\
+\textbf{Yes.} Section~\ref{sec:discussion} explicitly discusses: (a) the potential trivial-token explanation for layer-0 perfect separation; (b) single model, single dataset limitation; (c) imperfect sandbagging instruction effectiveness (78\% leakage); (d) causal null result limits the safety-relevant impact; (e) project-out is a coarse intervention that may not target the right computational site.
+
+\item \textbf{Broader Impacts.}
+\textit{Are broader societal impacts considered?} \\
+Understanding mechanistic signatures of capability concealment contributes to the development of activation-based monitoring tools for AI safety. The positive impact (sandbagging detection) is concrete; the negative impact (potential misuse for better sandbagging) is evaluated and found low given the causal null result. There are no anticipated environmental or social harms beyond standard LLM compute costs.
+
+\item \textbf{Human Subjects / Privacy.}
+\textit{Does the study involve human participants or personal data?} \\
+\textbf{No.} All data consists of model-generated responses to programmatically constructed prompts. No human subjects, personal data, or sensitive information is involved.
+
+\end{enumerate}

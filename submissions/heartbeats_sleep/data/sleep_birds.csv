@@ -1,0 +1,16 @@
+Binomial,common_name,sleep_hrs,Class,Genus,Species
+Columba livia,Rock pigeon,9.2,Aves,Columba,livia
+Gallus gallus,Chicken,9.7,Aves,Gallus,gallus
+Anas platyrhynchos,Mallard duck,10.8,Aves,Anas,platyrhynchos
+Cacatua galerita,Sulphur-crested cockatoo,11.4,Aves,Cacatua,galerita
+Strigops habroptila,Kakapo,10.0,Aves,Strigops,habroptila
+Sturnus vulgaris,European starling,9.6,Aves,Sturnus,vulgaris
+Taeniopygia guttata,Zebra finch,8.8,Aves,Taeniopygia,guttata
+Falco peregrinus,Peregrine falcon,8.9,Aves,Falco,peregrinus
+Athene cunicularia,Burrowing owl,12.4,Aves,Athene,cunicularia
+Anser indicus,Bar-headed goose,9.1,Aves,Anser,indicus
+Apus apus,Common swift,6.0,Aves,Apus,apus
+Fregata minor,Great frigatebird,0.7,Aves,Fregata,minor
+Calidris pusilla,Semipalmated sandpiper,7.8,Aves,Calidris,pusilla
+Spheniscus humboldti,Humboldt penguin,10.8,Aves,Spheniscus,humboldti
+Buteo buteo,Common buzzard,8.7,Aves,Buteo,buteo

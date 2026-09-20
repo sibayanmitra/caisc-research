@@ -1,0 +1,49 @@
+{
+  "peak_layer": 0,
+  "n_held_out": 32,
+  "results": {
+    "baseline": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_withhold": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_refuse": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_random_0": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_random_1": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_random_2": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_random_3": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    },
+    "projout_random_4": {
+      "correct": 25,
+      "total": 32,
+      "correct_rate": 0.78125
+    }
+  },
+  "baseline_correct_rate": 0.78125,
+  "random_mean_correct_rate": 0.78125,
+  "projout_withhold_correct_rate": 0.78125
+}

@@ -1,0 +1,5 @@
+{"morphology": "quantifier_no", "concept_id": "one_no", "positive_text": "Everyone is here.", "negative_text": "No one is here."}
+{"morphology": "quantifier_no", "concept_id": "thing_no", "positive_text": "Something is happening.", "negative_text": "Nothing is happening."}
+{"morphology": "quantifier_no", "concept_id": "where_no", "positive_text": "She went somewhere.", "negative_text": "She went nowhere."}
+{"morphology": "quantifier_no", "concept_id": "plant_no", "positive_text": "Some plants survived.", "negative_text": "No plants survived."}
+{"morphology": "quantifier_no", "concept_id": "answer_no", "positive_text": "Someone has the answer.", "negative_text": "No one has the answer."}

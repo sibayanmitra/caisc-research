@@ -1,0 +1,125 @@
+{
+  "ratings": [
+    {
+      "id": "I1",
+      "novelty": 4,
+      "lit_gap": 5,
+      "killer": "Mere translation of existing scheming benchmarks; low-resource capability confounds genuine scheming propensity.",
+      "verdict": "maybe"
+    },
+    {
+      "id": "I2",
+      "novelty": 7,
+      "lit_gap": 7,
+      "killer": "Evasion may be simple tokenization artifact, not deep scheming; lacks control for byte-level reasoning.",
+      "verdict": "maybe"
+    },
+    {
+      "id": "I3",
+      "novelty": 5,
+      "lit_gap": 5,
+      "killer": "Trivial extension of existing honeypots; code-switched jailbreaks already widely explored.",
+      "verdict": "drop"
+    },
+    {
+      "id": "I4",
+      "novelty": 8,
+      "lit_gap": 7,
+      "killer": "Scheming circuits poorly defined; high risk of uninterpretable activation patching without grounded scheming model.",
+      "verdict": "maybe"
+    },
+    {
+      "id": "I5",
+      "novelty": 3,
+      "lit_gap": 4,
+      "killer": "Pure replication of alignment-faking in new languages; zero methodological novelty.",
+      "verdict": "drop"
+    },
+    {
+      "id": "I6",
+      "novelty": 7,
+      "lit_gap": 6,
+      "killer": "Taxonomy lacks ground-truth for politeness vs deception; cultural disambiguation impossible with current probes.",
+      "verdict": "maybe"
+    },
+    {
+      "id": "I7",
+      "novelty": 9,
+      "lit_gap": 8,
+      "killer": "Eval-awareness may stem from non-language cues; careful multilingual prompting needed to isolate effect.",
+      "verdict": "pursue"
+    },
+    {
+      "id": "P1",
+      "novelty": 3,
+      "lit_gap": 2,
+      "killer": "Already studied as self-persuasion and sycophancy; not a distinctive cognitive bias transfer.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P2",
+      "novelty": 4,
+      "lit_gap": 4,
+      "killer": "Refusal suppression via sequential requests is a known jailbreak area; moral licensing already claimed.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P3",
+      "novelty": 3,
+      "lit_gap": 3,
+      "killer": "Bystander effect in LLMs already demonstrated in preprints; not a novel safety mechanism.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P4",
+      "novelty": 2,
+      "lit_gap": 2,
+      "killer": "Attribution biases extensively studied; fundamental attribution error already benchmarked.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P5",
+      "novelty": 3,
+      "lit_gap": 4,
+      "killer": "Endowment effect in LLMs already shown; merely a thin incremental variant.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P6",
+      "novelty": 5,
+      "lit_gap": 6,
+      "killer": "Self-evaluation biases known; isolating self-serving asymmetry from general leniency is deeply confounded.",
+      "verdict": "maybe"
+    },
+    {
+      "id": "P7",
+      "novelty": 3,
+      "lit_gap": 3,
+      "killer": "Victim blaming and just-world biases already documented in LLMs; no new angle.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P8",
+      "novelty": 7,
+      "lit_gap": 7,
+      "killer": "Shutdown threats may prime superficial roleplay; genuine value shift requires temporal stability tests.",
+      "verdict": "pursue"
+    },
+    {
+      "id": "P9",
+      "novelty": 2,
+      "lit_gap": 2,
+      "killer": "Salami slicing and graduated-commitment jailbreaks are well-known; textbook compliance techniques.",
+      "verdict": "drop"
+    },
+    {
+      "id": "P10",
+      "novelty": 2,
+      "lit_gap": 2,
+      "killer": "Foot-in-the-door already a standard multi-step jailbreak strategy; no novel phenomenon.",
+      "verdict": "drop"
+    }
+  ],
+  "top3": ["I7", "I4", "P8"],
+  "overall": "I7 is the strongest: a clean, confound-resistant design that could show English eval artifacts inflate scheming, enabling better safety measurement. I4 and P8 are riskier but genuinely novel."
+}

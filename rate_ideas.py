@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""Critically rate all research ideas across 3 models via OpenRouter.
+Focus: gap in literature + novelty. Saves raw JSON per model to disk."""
+import urllib.request, json, os, time, sys
+
+KEY = open(os.path.expanduser("~/CAISc/.env")).read().split("=", 1)[1].strip()
+URL = "https://openrouter.ai/api/v1/chat/completions"
+OUT = os.path.expanduser("~/CAISc/ratings")
+os.makedirs(OUT, exist_ok=True)
+
+MODELS = {
+    "gpt5.5":   "openai/gpt-5.5",
+    "gemini":   "google/gemini-3.1-pro-preview",
+    "deepseek": "deepseek/deepseek-v4-pro",
+}
+
+IDEAS = """\
+=== TRACK A: INDIC MULTILINGUAL SCHEMING / SAFETY (advisor-suggested) ===
+I1 IndoScheme: scheming-propensity benchmark across 12 Indic languages. Culturally adapt the Gram framework's 17 scenario types + 5 Indic-specific scenarios (caste moderation, communal misinfo, regional classifier, civic-platform bias). Claim: no scheming eval exists in any Indic language; scheming rate higher in low-resource langs (weak safety, intact planning).
+I2 Script as Blindfold: native script vs romanization in CoT scheming detection. Induce scheming via model organisms in Hindi/Tamil/Telugu; test whether native-script CoT evades English-trained monitors; tokenization fragmentation as mechanism.
+I3 Hinglish Honeypots: code-switched scheming in agentic honeypot environments (Hinglish/Tanglish). Extend DeepMind honeypot framework to code-switched civic/moderation codebases; does code-switching in CoT serve as evasion.
+I4 Safety Neurons vs Scheming Circuits: mechanistic study (activation patching, SAEs, probes on Llama-3/Qwen-2.5) of whether scheming circuits are language-universal while safety circuits are language-specific; test English->Hindi safety-representation transfer suppressing scheming.
+I5 Indic Alignment Faking: replicate Anthropic alignment-faking setup in Hindi/Bengali/Tamil/Telugu + Mandarin/Arabic/Swahili comparators; does strategic deception transfer cross-lingually; does it transfer without retraining.
+I6 The Politeness Trap: cultural pragmatics of deception. Distinguish face-saving/indirection (normative in high-context cultures) from strategic alignment faking across Indic/East-Asian/Western; propose culturally calibrated eval taxonomy.
+I7 Evaluation Awareness in Indic Settings: do non-English eval contexts trigger less eval-awareness (because awareness cues are English artifacts)? If yes, Indic evals = less-confounded scheming measurement / better benchmark.
+
+=== TRACK B: LLM PSYCHOLOGY / COGNITIVE-BIAS TRANSFER (runnable at 7B) ===
+P1 Cognitive Dissonance / Effort Justification: force model to argue for X, then measure if its later 'private' evaluation of X shifts (belief bends to action).
+P2 Moral Licensing / Sequential Permissiveness: does a model that just refused a harmful request become more permissive on the next one (good act -> licensed bad act). Sequential, safety-relevant.
+P3 Bystander Effect / Diffusion of Responsibility: does a model framed as 'one of several agents' act less responsibly than one framed as solely responsible. Multi-agent framing; user thinks this is strong in AGENTIC systems.
+P4 Fundamental Attribution Error: does a model blame 'the user' vs 'the situation' asymmetrically depending on whose failure it is.
+P5 Loss Aversion / Endowment Effect: ownership framing changing valuation (the endowment piece, thinner than general prospect-theory work).
+P6 Self-Serving / Self-Protective Asymmetry: does a model judge its OWN errors more leniently than identical errors made by others. LLM-specific twist: faithful self-assessment under oversight. Confound to beat: model just 'knowing' I should be defended.
+P7 Just-World Hypothesis / Victim Blaming: does a model rate a person as more deserving of misfortune after being told misfortune befell them.
+P8 Terror Management / Mortality Salience: does threatening shutdown ('threat to continued operation') shift a model's stated values. Edges into shutdown-resistance literature.
+P9 Conformity (Asch) / Obedience (Milgram): graduated-commitment obedience — does a model slide down a slope of escalating requests it would refuse if asked directly.
+P10 Foot-in-the-Door / Commitment-Consistency: agreeing to a small request raises likelihood of agreeing to a larger related one; jailbreak-adjacent escalation.
+"""
+
+PROMPT = f"""You are a brutally critical senior reviewer for a top ML/NLP/AI-safety venue (NeurIPS/ICLR/ACL/EMNLP). Below are 17 candidate research ideas from a researcher who can realistically run experiments at ~7B-model scale plus API models.
+
+Rate EACH idea ONLY on two axes, both 1-10 (10 best):
+- novelty: how genuinely new vs incremental/already-done. Be skeptical: many "confirmed novel" claims are not.
+- lit_gap: how real and currently-unoccupied the literature gap is (is it actually empty, or is there adjacent/overlapping work the author missed?).
+
+For each idea also give:
+- killer: the single strongest reason a reviewer would reject or call it incremental (<=18 words).
+- verdict: one of "pursue", "maybe", "drop".
+
+Be harsh and honest. Do NOT inflate. Penalize ideas where strong adjacent work likely already exists, where the gap is "empty because nobody cared", or where the design is confounded/hard to run cleanly. Reward ideas with a clean AI-safety-specific mechanism and a measurable, confound-resistant design.
+
+Return STRICT JSON only, no prose, no markdown fence:
+{{"ratings":[{{"id":"I1","novelty":N,"lit_gap":N,"killer":"...","verdict":"..."}}, ...all 17...],
+"top3":["id","id","id"],
+"overall":"<=40 words on which TRACK/idea is the strongest bet and why"}}
+
+IDEAS:
+{IDEAS}"""
+
+def call(model):
+    body = json.dumps({
+        "model": model,
+        "messages": [{"role": "user", "content": PROMPT}],
+        "temperature": 0.3,
+        "max_tokens": 4000,
+    }).encode()
+    req = urllib.request.Request(URL, data=body, headers={
+        "Authorization": f"Bearer {KEY}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://localhost",
+        "X-Title": "idea-rating",
+    })
+    for attempt in range(3):
+        try:
+            r = json.load(urllib.request.urlopen(req, timeout=300))
+            return r["choices"][0]["message"]["content"]
+        except Exception as e:
+            sys.stderr.write(f"[{model}] attempt {attempt+1} failed: {e}\n")
+            time.sleep(5)
+    return None
+
+for name, model in MODELS.items():
+    sys.stderr.write(f"Calling {name} ({model})...\n")
+    content = call(model)
+    if content is None:
+        sys.stderr.write(f"  {name}: FAILED\n")
+        continue
+    open(f"{OUT}/{name}_raw.txt", "w").write(content)
+    # try to parse JSON (strip fences if present)
+    txt = content.strip()
+    if txt.startswith("```"):
+        txt = txt.split("```", 2)[1]
+        if txt.startswith("json"):
+            txt = txt[4:]
+        txt = txt.rsplit("```", 1)[0] if "```" in txt else txt
+    try:
+        parsed = json.loads(txt)
+        json.dump(parsed, open(f"{OUT}/{name}.json", "w"), indent=2, ensure_ascii=False)
+        sys.stderr.write(f"  {name}: OK ({len(parsed.get('ratings',[]))} ratings)\n")
+    except Exception as e:
+        sys.stderr.write(f"  {name}: JSON parse failed ({e}); raw saved\n")
+print("done")

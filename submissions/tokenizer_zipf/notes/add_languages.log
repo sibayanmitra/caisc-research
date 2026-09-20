@@ -1,0 +1,19 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[22:34:56] tr: pulled 30.0 MB
+[22:34:57] tr: 30,000,000 chars
+[22:35:05]   word       tr: n=4,145,103 a_ll=0.979 a_csn=1.734 xmin=1
+[22:35:16]   gpt2_bpe   tr: n=14,452,041 a_ll=1.708 a_csn=1.511 xmin=10
+[22:35:25]   cl100k     tr: n=11,912,197 a_ll=1.688 a_csn=1.534 xmin=12
+[22:35:34]   o200k      tr: n=9,321,144 a_ll=1.454 a_csn=1.508 xmin=8
+[22:35:55]   qwen2.5    tr: n=10,859,837 a_ll=1.614 a_csn=2.268 xmin=7507
+[22:35:57]   byte       tr: n=32,560,829 a_ll=4.200 a_csn=1.536 xmin=29228
+[22:36:04] zh: pulled 30.0 MB
+[22:36:05] zh: 30,000,000 chars
+[22:36:24]   word       zh: n=3,215,309 a_ll=0.828 a_csn=2.118 xmin=5
+[22:36:35]   gpt2_bpe   zh: n=56,544,350 a_ll=1.693 a_csn=1.638 xmin=6
+[22:36:46]   cl100k     zh: n=36,346,063 a_ll=2.099 a_csn=1.547 xmin=3
+[22:36:58]   o200k      zh: n=24,742,432 a_ll=1.831 a_csn=1.443 xmin=2
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (135998 > 131072). Running this sequence through the model will result in indexing errors
+[22:37:43]   qwen2.5    zh: n=22,107,482 a_ll=1.183 a_csn=2.264 xmin=3987
+[22:37:46]   byte       zh: n=79,084,234 a_ll=4.081 a_csn=2.853 xmin=635294
+[22:37:46] wrote /home/anonymous/CAISc/autovoila/all-spikes/tokenizer-zipf/notes/alpha_table_extra.csv

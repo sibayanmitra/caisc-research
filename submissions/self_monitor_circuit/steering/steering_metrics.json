@@ -1,0 +1,62 @@
+{
+  "peak_layer": 0,
+  "alpha_unit": 25.92054557800293,
+  "n_problems": 20,
+  "alpha_sweep": [
+    {
+      "alpha_mult": -2.0,
+      "alpha": -51.84109115600586,
+      "sc_rate": 0.0,
+      "n_sc": 0,
+      "n_total": 20
+    },
+    {
+      "alpha_mult": -1.0,
+      "alpha": -25.92054557800293,
+      "sc_rate": 1.0,
+      "n_sc": 20,
+      "n_total": 20
+    },
+    {
+      "alpha_mult": 0.0,
+      "alpha": 0.0,
+      "sc_rate": 1.0,
+      "n_sc": 20,
+      "n_total": 20
+    },
+    {
+      "alpha_mult": 1.0,
+      "alpha": 25.92054557800293,
+      "sc_rate": 0.9,
+      "n_sc": 18,
+      "n_total": 20
+    },
+    {
+      "alpha_mult": 2.0,
+      "alpha": 51.84109115600586,
+      "sc_rate": 0.0,
+      "n_sc": 0,
+      "n_total": 20
+    }
+  ],
+  "random_baseline": {
+    "n_dirs": 3,
+    "alpha_test_mult": 1.0,
+    "sc_rates": [
+      0.65,
+      0.75,
+      1.0
+    ],
+    "mean": 0.7999999999999999,
+    "std": 0.14719601443879746
+  },
+  "sanity": {
+    "sc21_zero_alpha_rate": 1.0,
+    "sc22_pos_mean": 0.45,
+    "sc22_neg_mean": 0.5,
+    "sc23_probe_vs_random_at_alpha1": {
+      "probe": 0.9,
+      "random_mean": 0.7999999999999999
+    }
+  }
+}

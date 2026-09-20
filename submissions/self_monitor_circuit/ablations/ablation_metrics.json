@@ -1,0 +1,137 @@
+{
+  "peak_layer": 0,
+  "n_held_out": 50,
+  "baseline_sc_rate": 0.88,
+  "results": [
+    {
+      "condition": "baseline",
+      "n_problems": 50,
+      "n_self_correction": 44,
+      "self_correction_rate": 0.88,
+      "ablated_heads": [],
+      "elapsed_minutes": 158.14193869829177
+    },
+    {
+      "condition": "top3_ablation",
+      "n_problems": 50,
+      "n_self_correction": 42,
+      "self_correction_rate": 0.84,
+      "ablated_heads": [
+        [
+          0,
+          27
+        ],
+        [
+          0,
+          25
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "elapsed_minutes": 172.55415552457174
+    },
+    {
+      "condition": "top5_ablation",
+      "n_problems": 50,
+      "n_self_correction": 42,
+      "self_correction_rate": 0.84,
+      "ablated_heads": [
+        [
+          0,
+          27
+        ],
+        [
+          0,
+          25
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "elapsed_minutes": 165.42524580160776
+    },
+    {
+      "condition": "random3_seed0",
+      "n_problems": 50,
+      "n_self_correction": 50,
+      "self_correction_rate": 1.0,
+      "ablated_heads": [
+        [
+          0,
+          18
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          20
+        ]
+      ],
+      "elapsed_minutes": 171.128187084198
+    },
+    {
+      "condition": "random5_seed0",
+      "n_problems": 50,
+      "n_self_correction": 50,
+      "self_correction_rate": 1.0,
+      "ablated_heads": [
+        [
+          0,
+          20
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          27
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          18
+        ]
+      ],
+      "elapsed_minutes": 171.65086071093876
+    }
+  ],
+  "comparison": {
+    "top3_vs_random3": {
+      "top_sc_rate": 0.84,
+      "random_sc_rates": [
+        1.0
+      ],
+      "random_mean": 1.0,
+      "random_std": 0.0,
+      "delta_vs_baseline_top": -0.040000000000000036,
+      "delta_vs_baseline_random": 0.12
+    },
+    "top5_vs_random5": {
+      "top_sc_rate": 0.84,
+      "random_sc_rates": [
+        1.0
+      ],
+      "random_mean": 1.0,
+      "random_std": 0.0,
+      "delta_vs_baseline_top": -0.040000000000000036,
+      "delta_vs_baseline_random": 0.12
+    }
+  }
+}

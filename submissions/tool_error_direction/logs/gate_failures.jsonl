@@ -1,0 +1,21 @@
+{"ts": 1779455121.2807791, "gate": "PF5-G-AMBIG [Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779455130.0129156, "gate": "PF4-G-CACHE [Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 1e-05, "recovery": null}
+{"ts": 1779455210.5166352, "gate": "PF5-G-AMBIG [NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779455218.8358347, "gate": "PF4-G-CACHE [NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 1e-05, "recovery": null}
+{"ts": 1779455447.7979999, "gate": "PF5-G-AMBIG [Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779455456.3554862, "gate": "PF4-G-CACHE [Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 1e-05, "recovery": null}
+{"ts": 1779455527.8723323, "gate": "PF5-G-AMBIG [NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779455534.2938879, "gate": "PF4-G-CACHE [NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 1e-05, "recovery": null}
+{"ts": 1779463697.6881866, "gate": "G-SHUF[Qwen/Qwen3-8B]", "passed": false, "observed": 0.5222222222222223, "threshold": 0.4, "recovery": null}
+{"ts": 1779463697.6883228, "gate": "G-POS[Qwen/Qwen3-8B]", "passed": false, "observed": 0.6222222222222222, "threshold": 0.55, "recovery": null}
+{"ts": 1779463697.6884027, "gate": "G-LOO[Qwen/Qwen3-8B]", "passed": false, "observed": "1/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779466097.0792408, "gate": "G-SHUF[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779466097.079426, "gate": "G-LOO[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779483428.988489, "gate": "G-SHUF[Qwen/Qwen3-8B]", "passed": false, "observed": 0.5222222222222223, "threshold": 0.4, "recovery": null}
+{"ts": 1779483428.9886446, "gate": "G-POS[Qwen/Qwen3-8B]", "passed": false, "observed": 0.6222222222222222, "threshold": 0.55, "recovery": null}
+{"ts": 1779483428.988728, "gate": "G-LOO[Qwen/Qwen3-8B]", "passed": false, "observed": "1/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779485736.1831396, "gate": "G-SHUF[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779485736.1833253, "gate": "G-LOO[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779487336.5929198, "gate": "G-SHUF[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779487336.5930617, "gate": "G-POS[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": 0.5611111111111111, "threshold": 0.55, "recovery": null}
+{"ts": 1779487336.593152, "gate": "G-LOO[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}

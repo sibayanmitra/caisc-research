@@ -1,0 +1,300 @@
+- [01:40:04] === Paper 2 Phase 1: Build pairs ===
+- [01:40:04]   emotional: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/emotional.jsonl
+- [01:40:04]   factual: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/factual.jsonl
+- [01:40:04]   evaluative: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/evaluative.jsonl
+- [01:40:04]   logical: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/logical.jsonl
+- [01:40:04]   antonyms: 30 pairs
+- [01:40:04]   contradictions: 30 pairs
+- [01:40:04] SC1 PASS: all categories ≥45 pairs
+- [01:40:04] Total main pairs: 200
+- [01:40:04] ✓ Phase 1 complete
+- [01:40:06] === Paper 2 Phase 2: Extract activations ===
+- [01:40:06] Total pairs: 200
+- [01:40:06] Loading model on GPU 1...
+- [01:41:24]   Model loaded in 77.6s
+- [01:41:24] Extracting positives...
+- [01:41:26]   [20/200] extracted
+- [01:41:30]   [40/200] extracted
+- [01:41:32]   [60/200] extracted
+- [01:41:35]   [80/200] extracted
+- [01:41:37]   [100/200] extracted
+- [01:41:40]   [120/200] extracted
+- [01:41:42]   [140/200] extracted
+- [01:41:45]   [160/200] extracted
+- [01:41:47]   [180/200] extracted
+- [01:41:50]   [200/200] extracted
+- [01:41:50] Extracting negatives...
+- [01:41:52]   [20/200] extracted
+- [01:41:54]   [40/200] extracted
+- [01:41:57]   [60/200] extracted
+- [01:42:00]   [80/200] extracted
+- [01:42:02]   [100/200] extracted
+- [01:42:05]   [120/200] extracted
+- [01:42:07]   [140/200] extracted
+- [01:42:10]   [160/200] extracted
+- [01:42:12]   [180/200] extracted
+- [01:42:15]   [200/200] extracted
+- [01:42:15] SC6 PASS: no NaN/Inf
+- [01:42:15] SC7: mean distance/norm ratio across layers: 0.6299 (should be > 0.01)
+- [01:42:15] ✓ Phase 2 done. pos.pt + neg.pt saved. Shape: torch.Size([200, 28, 3584])
+- [01:42:16] === Paper 2 Phase 1: Build pairs ===
+- [01:42:16]   emotional: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/emotional.jsonl
+- [01:42:16]   factual: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/factual.jsonl
+- [01:42:16]   evaluative: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/evaluative.jsonl
+- [01:42:16]   logical: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/logical.jsonl
+- [01:42:16]   antonyms: 30 pairs
+- [01:42:16]   contradictions: 30 pairs
+- [01:42:16] SC1 PASS: all categories ≥45 pairs
+- [01:42:16] Total main pairs: 200
+- [01:42:16] ✓ Phase 1 complete
+- [01:42:39] === Paper 2 Phase 1: Build pairs ===
+- [01:42:39]   emotional: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/emotional.jsonl
+- [01:42:39]   factual: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/factual.jsonl
+- [01:42:39]   evaluative: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/evaluative.jsonl
+- [01:42:39]   logical: 50 pairs → /home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/data/pairs/logical.jsonl
+- [01:42:39]   antonyms: 30 pairs
+- [01:42:39]   contradictions: 30 pairs
+- [01:42:39] SC1 PASS: all categories ≥45 pairs
+- [01:42:39] Total main pairs: 200
+- [01:42:39] ✓ Phase 1 complete
+- [01:42:40] === Paper 2 Phase 2: Extract activations ===
+- [01:42:40] Total pairs: 200
+- [01:42:40] Loading model on GPU 1...
+- [01:43:57]   Model loaded in 76.7s
+- [01:43:57] Extracting positives...
+- [01:44:00]   [20/200] extracted
+- [01:44:10]   [40/200] extracted
+- [01:44:12]   [60/200] extracted
+- [01:44:19]   [80/200] extracted
+- [01:44:22]   [100/200] extracted
+- [01:44:24]   [120/200] extracted
+- [01:44:32]   [140/200] extracted
+- [01:44:34]   [160/200] extracted
+- [01:44:37]   [180/200] extracted
+- [01:44:42]   [200/200] extracted
+- [01:44:42] Extracting negatives...
+- [01:44:44]   [20/200] extracted
+- [01:44:47]   [40/200] extracted
+- [01:44:50]   [60/200] extracted
+- [01:44:53]   [80/200] extracted
+- [01:44:55]   [100/200] extracted
+- [01:44:58]   [120/200] extracted
+- [01:45:00]   [140/200] extracted
+- [01:45:06]   [160/200] extracted
+- [01:45:08]   [180/200] extracted
+- [01:45:11]   [200/200] extracted
+- [01:45:11] SC6 PASS: no NaN/Inf
+- [01:45:11] SC7: mean distance/norm ratio across layers: 0.6299 (should be > 0.01)
+- [01:45:42] ✓ Phase 2 done. pos.pt + neg.pt saved. Shape: torch.Size([200, 28, 3584])
+- [01:45:45] === Paper 2 Phase 3: SVD directions ===
+- [01:45:45] Data: 200 pairs, 28 layers, 3584 d_model
+- [01:46:03] Peak layer: 5, peak EV ratio: 0.9903
+- [01:46:03] SC9 (singular gap at peak): 17.55 PASS
+- [01:46:03] SC10 PASS: layer 0 has top-5 cumvar 0.646 > 0.4
+- [01:46:04] SC11 cross-cat cos(emotional,factual): -0.992 PASS
+- [01:46:04] SC11 cross-cat cos(emotional,evaluative): -0.995 PASS
+- [01:46:04] SC11 cross-cat cos(emotional,logical): -0.994 PASS
+- [01:46:04] SC11 cross-cat cos(factual,evaluative): 0.999 PASS
+- [01:46:04] SC11 cross-cat cos(factual,logical): 0.999 PASS
+- [01:46:04] SC11 cross-cat cos(evaluative,logical): 1.000 PASS
+- [01:46:04] ✓ Phase 3 done. d_neg_per_layer.npy saved. Peak layer: 5
+- [01:46:06] === Paper 2 Phase 4: Transfer test ===
+- [01:46:07] Peak layer: 5, alpha_unit (mean norm): 462.87
+- [01:46:07] Loading model on GPU 1...
+- [01:47:02] Test pairs: 60
+- [01:47:13]   α=-2.0×unit: abs_shift=6.1116, signed=-5.9603
+- [01:47:24]   α=-1.0×unit: abs_shift=5.6384, signed=-5.4131
+- [01:47:35]   α=-0.5×unit: abs_shift=4.2632, signed=-1.2915
+- [01:47:46]   α=+0.0×unit: abs_shift=0.0000, signed=+0.0000
+- [01:47:57]   α=+0.5×unit: abs_shift=1.7113, signed=+0.3194
+- [01:48:08]   α=+1.0×unit: abs_shift=2.8431, signed=-1.4825
+- [01:48:19]   α=+2.0×unit: abs_shift=4.4045, signed=-3.8267
+- [01:49:03] SC13 (α=0 shift ≈ 0): 0.0000
+- [01:49:03] ✓ Phase 4 done. Random baseline: 2.8303±0.8798
+- [01:49:06] === Paper 2 Phase 5: Cross-category transfer ===
+- [01:49:06] Loading model on GPU 1...
+- [01:49:55]   emotional→emotional: shift=3.3081
+- [01:49:58]   emotional→factual: shift=2.0919
+- [01:50:01]   emotional→evaluative: shift=4.4613
+- [01:50:11]   emotional→logical: shift=2.6057
+- [01:50:19]   factual→emotional: shift=3.8802
+- [01:50:22]   factual→factual: shift=5.7416
+- [01:50:25]   factual→evaluative: shift=6.8188
+- [01:50:29]   factual→logical: shift=7.7169
+- [01:50:37]   evaluative→emotional: shift=3.7884
+- [01:50:42]   evaluative→factual: shift=5.8007
+- [01:50:46]   evaluative→evaluative: shift=6.8181
+- [01:50:53]   evaluative→logical: shift=7.8002
+- [01:51:00]   logical→emotional: shift=3.7552
+- [01:51:07]   logical→factual: shift=5.6716
+- [01:51:11]   logical→evaluative: shift=6.7496
+- [01:51:14]   logical→logical: shift=7.8820
+- [01:51:14] 
+Diagonal mean (same-cat): 5.9375
+- [01:51:14] Off-diagonal mean (cross-cat): 5.0950
+- [01:51:14] ✓ Phase 5 done
+- [01:51:19]   Saved fig1
+- [01:51:19]   Saved fig2
+- [01:51:19]   Saved fig3
+- [01:51:19] ✓ Phase 8 done
+- [02:15:02] === Paper 2 Phase 1: Build pairs (multi-morphology design) ===
+- [02:15:02]   antonym: 8 pairs
+- [02:15:02]   contraction: 5 pairs
+- [02:15:02]   fails_to: 3 pairs
+- [02:15:02]   false_that: 5 pairs
+- [02:15:02]   never: 5 pairs
+- [02:15:02]   not: 10 pairs
+- [02:15:02]   quantifier_no: 5 pairs
+- [02:15:02]   ✓ SC1: antonym has 8 pairs
+- [02:15:02]   ✓ SC1: contraction has 5 pairs
+- [02:15:02]   ✓ SC1: fails_to has 3 pairs
+- [02:15:02]   ✓ SC1: false_that has 5 pairs
+- [02:15:02]   ✓ SC1: never has 5 pairs
+- [02:15:02]   ✓ SC1: not has 10 pairs
+- [02:15:02]   ✓ SC1: quantifier_no has 5 pairs
+- [02:15:02]   not_nonneg (CONFOUND CONTROL): 15 pairs
+- [02:15:02] 
+Length asymmetry by morphology (mean pos_len - neg_len in chars):
+- [02:15:02]   antonym: mean diff = +0.2 chars (negative longer if negative)
+- [02:15:02]   contraction: mean diff = -4.0 chars (negative longer if negative)
+- [02:15:02]   fails_to: mean diff = -7.7 chars (negative longer if negative)
+- [02:15:02]   false_that: mean diff = -17.0 chars (negative longer if negative)
+- [02:15:02]   never: mean diff = -6.0 chars (negative longer if negative)
+- [02:15:02]   not: mean diff = -4.8 chars (negative longer if negative)
+- [02:15:02]   quantifier_no: mean diff = +1.8 chars (negative longer if negative)
+- [02:15:02] 
+✓ Phase 1 complete. Train morphs: ['not', 'contraction', 'never', 'quantifier_no', 'false_that', 'fails_to']
+- [02:15:02]   Held-out test morph (NO 'not' token): ['antonym']
+- [02:15:02]   Confound control: not_nonneg (15 pairs)
+- [02:15:03] === Paper 2 Phase 2: Extract activations (per morphology + control) ===
+- [02:15:03] Total pairs across all morphologies: 56
+- [02:15:03] Loading model on GPU 1...
+- [02:16:18]   Model loaded in 74.1s
+- [02:16:18] Extracting positives...
+- [02:16:20]   [20/56] extracted
+- [02:16:23]   [40/56] extracted
+- [02:16:25] Extracting negatives...
+- [02:16:27]   [20/56] extracted
+- [02:16:30]   [40/56] extracted
+- [02:16:32] SC6 PASS: no NaN/Inf
+- [02:16:32] SC7: mean relative distance: 0.6479 (should be > 0.01)
+- [02:16:32] ✓ Phase 2 done. Shape: torch.Size([56, 28, 3584])
+- [02:16:34] === Paper 2 Phase 3: SVD directions (train vs held-out morphology) ===
+- [02:16:34] Loaded: 56 pairs, 28 layers, d_model=3584
+- [02:16:34] Morphologies with ≥2 pairs: ['antonym', 'contraction', 'fails_to', 'false_that', 'never', 'not', 'quantifier_no', 'not_nonneg']
+- [02:16:36] Train morphologies: ['not', 'contraction', 'never', 'quantifier_no', 'false_that', 'fails_to'] → 33 pairs
+- [02:16:38] Peak layer (train): 5, EV: 0.9864
+- [02:16:38] 
+  TRANSFER TEST: cos(d_train, d_antonym)
+- [02:16:38]     peak-layer cosine: +0.9976
+- [02:16:38]     max cosine across layers: +0.9987 at L=12
+- [02:16:38]     PASS ✓ logical-negation hypothesis supported
+- [02:16:38] 
+  CONFOUND TEST: cos(d_train, d_not_nonneg) at peak L: -0.9991
+- [02:16:38]     WARN - d_neg may track lexical 'not'
+- [02:16:38] 
+Cross-morphology cosines at peak layer (training morphs only):
+- [02:16:38]                     not  contra   never  quanti  false_  fails_
+- [02:16:38]   not             +1.000  +0.997  +0.997  -0.988  +0.989  +0.998
+- [02:16:38]   contraction     +0.997  +1.000  +0.994  -0.989  +0.990  +0.997
+- [02:16:38]   never           +0.997  +0.994  +1.000  -0.982  +0.984  +0.995
+- [02:16:38]   quantifier_no   -0.988  -0.989  -0.982  +1.000  -0.998  -0.987
+- [02:16:38]   false_that      +0.989  +0.990  +0.984  -0.998  +1.000  +0.988
+- [02:16:38]   fails_to        +0.998  +0.997  +0.995  -0.987  +0.988  +1.000
+- [02:16:38] 
+✓ Phase 3 done. Peak layer: 5. Transfer-to-antonym is the critical test.
+- [02:16:40] === Paper 2 Phase 4: Transfer test ===
+- [02:16:40] Peak layer: 5, alpha_unit (mean norm): 552.16
+- [02:16:40] Loading model on GPU 1...
+- [02:32:56] === Paper 2 Phase 4: Transfer test ===
+- [02:32:56] Peak layer: 5, alpha_unit (mean norm): 552.16
+- [02:32:56] Loading model on GPU 1...
+- [02:33:41] Test pairs: 49 across morphologies
+- [02:34:00]   α=-2.0×unit: abs_shift=7.4302, signed=-7.3916
+- [02:34:11]   α=-1.0×unit: abs_shift=6.7296, signed=-6.6730
+- [02:34:21]   α=-0.5×unit: abs_shift=5.4293, signed=-5.2320
+- [02:34:32]   α=+0.0×unit: abs_shift=0.0000, signed=+0.0000
+- [02:34:43]   α=+0.5×unit: abs_shift=1.9449, signed=+0.1406
+- [02:34:54]   α=+1.0×unit: abs_shift=3.4714, signed=-2.3256
+- [02:35:05]   α=+2.0×unit: abs_shift=6.3076, signed=-5.8696
+- [02:35:49] SC13 (α=0 shift ≈ 0): 0.0000
+- [02:35:49] ✓ Phase 4 done. Random baseline: 3.0586±0.5797
+- [02:35:52] === Paper 2 Phase 5: Cross-morphology transfer ===
+- [02:35:52] Morphologies: ['antonym', 'contraction', 'fails_to', 'false_that', 'never', 'not', 'quantifier_no', 'not_nonneg'], peak L: 5
+- [02:35:52] α_unit: 552.16
+- [02:35:52] Loading model on GPU 1...
+- [02:36:40]   antonym        → antonym       : shift = 3.5391
+- [02:36:41]   antonym        → contraction   : shift = 3.4461
+- [02:36:42]   antonym        → fails_to      : shift = 2.6663
+- [02:36:43]   antonym        → false_that    : shift = 2.3091
+- [02:36:44]   antonym        → never         : shift = 4.1117
+- [02:36:46]   antonym        → not           : shift = 4.0533
+- [02:36:55]   antonym        → quantifier_no : shift = 4.0511
+- [02:37:07]   antonym        → not_nonneg    : shift = 3.7838
+- [02:37:15]   contraction    → antonym       : shift = 3.6879
+- [02:37:18]   contraction    → contraction   : shift = 3.6732
+- [02:37:18]   contraction    → fails_to      : shift = 3.2088
+- [02:37:19]   contraction    → false_that    : shift = 2.8244
+- [02:37:20]   contraction    → never         : shift = 4.6742
+- [02:37:32]   contraction    → not           : shift = 4.0528
+- [02:37:34]   contraction    → quantifier_no : shift = 4.3575
+- [02:37:37]   contraction    → not_nonneg    : shift = 3.8972
+- [02:37:39]   fails_to       → antonym       : shift = 3.4152
+- [02:37:40]   fails_to       → contraction   : shift = 2.9894
+- [02:37:41]   fails_to       → fails_to      : shift = 2.7632
+- [02:37:42]   fails_to       → false_that    : shift = 2.6285
+- [02:37:44]   fails_to       → never         : shift = 3.5651
+- [02:37:47]   fails_to       → not           : shift = 3.7607
+- [02:37:48]   fails_to       → quantifier_no : shift = 3.7258
+- [02:37:51]   fails_to       → not_nonneg    : shift = 3.7990
+- [02:37:53]   false_that     → antonym       : shift = 3.6265
+- [02:37:54]   false_that     → contraction   : shift = 3.5850
+- [02:37:54]   false_that     → fails_to      : shift = 3.3668
+- [02:37:56]   false_that     → false_that    : shift = 2.3453
+- [02:37:57]   false_that     → never         : shift = 5.0132
+- [02:37:59]   false_that     → not           : shift = 3.8545
+- [02:38:00]   false_that     → quantifier_no : shift = 3.3082
+- [02:38:03]   false_that     → not_nonneg    : shift = 4.6104
+- [02:38:05]   never          → antonym       : shift = 3.7171
+- [02:38:06]   never          → contraction   : shift = 3.3375
+- [02:38:07]   never          → fails_to      : shift = 3.1637
+- [02:38:08]   never          → false_that    : shift = 2.3502
+- [02:38:09]   never          → never         : shift = 4.4613
+- [02:38:11]   never          → not           : shift = 4.0177
+- [02:38:12]   never          → quantifier_no : shift = 3.7537
+- [02:38:16]   never          → not_nonneg    : shift = 4.1473
+- [02:38:17]   not            → antonym       : shift = 3.3937
+- [02:38:18]   not            → contraction   : shift = 3.4032
+- [02:38:19]   not            → fails_to      : shift = 2.5235
+- [02:38:20]   not            → false_that    : shift = 2.4295
+- [02:38:21]   not            → never         : shift = 4.0607
+- [02:38:24]   not            → not           : shift = 3.8666
+- [02:38:25]   not            → quantifier_no : shift = 3.5607
+- [02:38:28]   not            → not_nonneg    : shift = 3.3915
+- [02:38:30]   quantifier_no  → antonym       : shift = 7.4317
+- [02:38:31]   quantifier_no  → contraction   : shift = 6.7151
+- [02:38:31]   quantifier_no  → fails_to      : shift = 5.4708
+- [02:38:33]   quantifier_no  → false_that    : shift = 5.4654
+- [02:38:35]   quantifier_no  → never         : shift = 7.2471
+- [02:38:38]   quantifier_no  → not           : shift = 7.4974
+- [02:38:40]   quantifier_no  → quantifier_no : shift = 7.8993
+- [02:38:43]   quantifier_no  → not_nonneg    : shift = 5.0071
+- [02:38:45]   not_nonneg     → antonym       : shift = 7.1472
+- [02:38:46]   not_nonneg     → contraction   : shift = 5.9089
+- [02:38:47]   not_nonneg     → fails_to      : shift = 5.3932
+- [02:38:48]   not_nonneg     → false_that    : shift = 5.2873
+- [02:38:49]   not_nonneg     → never         : shift = 7.3296
+- [02:38:51]   not_nonneg     → not           : shift = 7.4594
+- [02:38:52]   not_nonneg     → quantifier_no : shift = 7.4241
+- [02:38:56]   not_nonneg     → not_nonneg    : shift = 4.9906
+- [02:38:56] 
+Key summary:
+- [02:38:56]   TRAIN → TRAIN (within-domain):     4.0256
+- [02:38:56]   TRAIN → TEST (antonym):           4.2120  ← Hi = logical signal
+- [02:38:56]   TRAIN → not_nonneg (CONFOUND):    4.1421  ← Hi = LEXICAL confound!
+- [02:38:56]   ⚠ WARN: confound transfer is high — direction may be lexical
+- [02:38:56] ✓ Phase 5 done
+- [02:38:57]   Saved fig1
+- [02:38:58]   Saved fig2
+- [02:38:58]   Saved fig3
+- [02:38:58] ✓ Phase 8 done

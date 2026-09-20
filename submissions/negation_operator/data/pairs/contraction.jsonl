@@ -1,0 +1,5 @@
+{"morphology": "contraction", "concept_id": "swim_cant", "positive_text": "The athlete can swim.", "negative_text": "The athlete can't swim."}
+{"morphology": "contraction", "concept_id": "come_wont", "positive_text": "She will come tomorrow.", "negative_text": "She won't come tomorrow."}
+{"morphology": "contraction", "concept_id": "see_didnt", "positive_text": "He saw the message.", "negative_text": "He didn't see the message."}
+{"morphology": "contraction", "concept_id": "rain_isnt", "positive_text": "It is raining outside.", "negative_text": "It isn't raining outside."}
+{"morphology": "contraction", "concept_id": "work_doesnt", "positive_text": "This method works.", "negative_text": "This method doesn't work."}

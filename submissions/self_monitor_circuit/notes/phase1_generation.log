@@ -1,0 +1,35 @@
+============================================================
+Phase 1 started at 2026-05-28 00:50:37
+Generation budget: 10800s (180.0 min)
+Loading model...
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   5%|▍         | 16/339 [00:00<00:03, 90.76it/s]Loading weights:   8%|▊         | 28/339 [00:00<00:04, 74.17it/s]Loading weights:  12%|█▏        | 39/339 [00:00<00:03, 85.13it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:03, 74.51it/s]Loading weights:  19%|█▉        | 64/339 [00:00<00:03, 82.84it/s]Loading weights:  22%|██▏       | 76/339 [00:00<00:03, 75.54it/s]Loading weights:  26%|██▌       | 88/339 [00:01<00:02, 84.44it/s]Loading weights:  29%|██▉       | 100/339 [00:01<00:03, 76.08it/s]Loading weights:  33%|███▎      | 112/339 [00:01<00:02, 82.96it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:02, 76.22it/s]Loading weights:  40%|████      | 136/339 [00:01<00:02, 81.39it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:02, 75.86it/s]Loading weights:  47%|████▋     | 160/339 [00:02<00:02, 72.28it/s]Loading weights:  51%|█████     | 172/339 [00:02<00:02, 78.46it/s]Loading weights:  54%|█████▍    | 184/339 [00:02<00:02, 74.42it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 81.90it/s]Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 74.56it/s]Loading weights:  65%|██████▍   | 220/339 [00:02<00:01, 71.22it/s]Loading weights:  68%|██████▊   | 232/339 [00:02<00:01, 79.43it/s]Loading weights:  72%|███████▏  | 244/339 [00:03<00:01, 85.73it/s]Loading weights:  76%|███████▌  | 256/339 [00:03<00:01, 78.37it/s]Loading weights:  79%|███████▉  | 268/339 [00:03<00:00, 84.47it/s]Loading weights:  83%|████████▎ | 280/339 [00:03<00:00, 77.52it/s]Loading weights:  86%|████████▌ | 292/339 [00:03<00:00, 84.28it/s]Loading weights:  90%|████████▉ | 304/339 [00:03<00:00, 76.68it/s]Loading weights:  93%|█████████▎| 316/339 [00:04<00:00, 71.59it/s]Loading weights:  97%|█████████▋| 328/339 [00:04<00:00, 80.61it/s]Loading weights: 100%|██████████| 339/339 [00:04<00:00, 81.16it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loaded pretrained model Qwen/Qwen2.5-7B into HookedTransformer
+  Model loaded in 47.9s
+  Model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+  Layers: 28, d_model: 3584, n_heads: 28
+Loading MATH dataset...
+  Loaded 500 problems from HuggingFaceH4/MATH-500
+  Hard problems (Level 3-5, hard subjects): 0
+  Other problems: 500
+
+Generation params: samples=2, max_new=800, T=0.7, top_p=0.95
+  Generated 10 so far (0.01/sec, 15.5 min in, 164.5 min left)
+  Generated 20 so far (0.01/sec, 30.1 min in, 149.9 min left)
+  Generated 30 so far (0.01/sec, 44.3 min in, 135.7 min left)
+  Generated 40 so far (0.01/sec, 60.6 min in, 119.4 min left)
+  Generated 50 so far (0.01/sec, 75.2 min in, 104.8 min left)
+  Generated 60 so far (0.01/sec, 90.6 min in, 89.4 min left)
+  Generated 70 so far (0.01/sec, 104.4 min in, 75.6 min left)
+  Generated 80 so far (0.01/sec, 118.6 min in, 61.4 min left)
+  Generated 90 so far (0.01/sec, 132.6 min in, 47.4 min left)
+  Generated 100 so far (0.01/sec, 147.7 min in, 32.3 min left)
+Checkpoint: 50 problems, 100 generations, 32.3 min budget left
+  Generated 110 so far (0.01/sec, 161.7 min in, 18.3 min left)
+  Generated 120 so far (0.01/sec, 176.2 min in, 3.8 min left)
+Time budget tight after 123 generations — stopping
+Time budget exhausted after 62 problems, 123 generations
+
+✓ Phase 1 step 1 complete: 123 generations from 62 problems in 180.5 min
+  Average: 88.1 sec/generation
+  Output: /home/anonymous/CAISc/autovoila/all-spikes/paper1-self-monitor-circuit/data/generations/generations.jsonl

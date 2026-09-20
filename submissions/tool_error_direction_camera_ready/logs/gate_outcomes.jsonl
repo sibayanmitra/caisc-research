@@ -1,0 +1,47 @@
+{"ts": 1779463697.6875923, "gate": "G-AMBIG[Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779463697.688057, "gate": "G-LAY[Qwen/Qwen3-8B]", "passed": true, "observed": 0.5555555555555647, "threshold": 5.0, "recovery": null}
+{"ts": 1779463697.6881166, "gate": "G-PCA[Qwen/Qwen3-8B]", "passed": true, "observed": 0.8686680652616214, "threshold": 0.4, "recovery": null}
+{"ts": 1779463697.6881537, "gate": "G-SHUF[Qwen/Qwen3-8B]", "passed": false, "observed": 0.5222222222222223, "threshold": 0.4, "recovery": null}
+{"ts": 1779463697.6882393, "gate": "G-TOKEN[Qwen/Qwen3-8B]", "passed": true, "observed": "3/3 positions \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779463697.6882691, "gate": "G-WITHIN[Qwen/Qwen3-8B]", "passed": true, "observed": "3/3 error types \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779463697.6882982, "gate": "G-POS[Qwen/Qwen3-8B]", "passed": false, "observed": 0.6222222222222222, "threshold": 0.55, "recovery": null}
+{"ts": 1779463697.6883516, "gate": "G-SEED[Qwen/Qwen3-8B]", "passed": true, "observed": "1/1 evaluable seeds \u2265 0.6", "threshold": 0.6, "recovery": null}
+{"ts": 1779463697.6883779, "gate": "G-LOO[Qwen/Qwen3-8B]", "passed": false, "observed": "1/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779466097.0785563, "gate": "G-AMBIG[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779466097.0791106, "gate": "G-LAY[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 1.6666666666666607, "threshold": 5.0, "recovery": null}
+{"ts": 1779466097.0791728, "gate": "G-PCA[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.9061284096853136, "threshold": 0.4, "recovery": null}
+{"ts": 1779466097.0792086, "gate": "G-SHUF[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779466097.07928, "gate": "G-TOKEN[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "3/3 positions \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779466097.0793102, "gate": "G-WITHIN[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "3/3 error types \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779466097.0793412, "gate": "G-POS[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.5, "threshold": 0.55, "recovery": null}
+{"ts": 1779466097.0793698, "gate": "G-SEED[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "1/1 evaluable seeds \u2265 0.6", "threshold": 0.6, "recovery": null}
+{"ts": 1779466097.0793989, "gate": "G-LOO[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779474793.321877, "gate": "PF5-G-AMBIG [Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779474798.8591044, "gate": "PF4-G-CACHE [Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": 0.0, "threshold": 0.001, "recovery": null}
+{"ts": 1779483428.9879594, "gate": "G-AMBIG[Qwen/Qwen3-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779483428.9883723, "gate": "G-LAY[Qwen/Qwen3-8B]", "passed": true, "observed": 0.5555555555555647, "threshold": 5.0, "recovery": null}
+{"ts": 1779483428.988423, "gate": "G-PCA[Qwen/Qwen3-8B]", "passed": true, "observed": 0.8686680652616214, "threshold": 0.4, "recovery": null}
+{"ts": 1779483428.9884565, "gate": "G-SHUF[Qwen/Qwen3-8B]", "passed": false, "observed": 0.5222222222222223, "threshold": 0.4, "recovery": null}
+{"ts": 1779483428.9885356, "gate": "G-TOKEN[Qwen/Qwen3-8B]", "passed": true, "observed": "3/3 positions \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779483428.9885685, "gate": "G-WITHIN[Qwen/Qwen3-8B]", "passed": true, "observed": "3/3 error types \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779483428.9885962, "gate": "G-POS[Qwen/Qwen3-8B]", "passed": false, "observed": 0.6222222222222222, "threshold": 0.55, "recovery": null}
+{"ts": 1779483428.9886754, "gate": "G-SEED[Qwen/Qwen3-8B]", "passed": true, "observed": "1/1 evaluable seeds \u2265 0.6", "threshold": 0.6, "recovery": null}
+{"ts": 1779483428.9887023, "gate": "G-LOO[Qwen/Qwen3-8B]", "passed": false, "observed": "1/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779485736.1823072, "gate": "G-AMBIG[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779485736.1829772, "gate": "G-LAY[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 1.6666666666666607, "threshold": 5.0, "recovery": null}
+{"ts": 1779485736.1830719, "gate": "G-PCA[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.9061284096853136, "threshold": 0.4, "recovery": null}
+{"ts": 1779485736.1831086, "gate": "G-SHUF[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779485736.1831777, "gate": "G-TOKEN[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "3/3 positions \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779485736.1832082, "gate": "G-WITHIN[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "3/3 error types \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779485736.1832411, "gate": "G-POS[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": 0.5, "threshold": 0.55, "recovery": null}
+{"ts": 1779485736.1832705, "gate": "G-SEED[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": true, "observed": "1/1 evaluable seeds \u2265 0.6", "threshold": 0.6, "recovery": null}
+{"ts": 1779485736.1832988, "gate": "G-LOO[NousResearch/Hermes-3-Llama-3.1-8B]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779487336.592403, "gate": "G-AMBIG[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": 0.0, "threshold": 0.15, "recovery": null}
+{"ts": 1779487336.592805, "gate": "G-LAY[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": 0.8333333333333415, "threshold": 5.0, "recovery": null}
+{"ts": 1779487336.5928555, "gate": "G-PCA[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": 0.6843617641280687, "threshold": 0.4, "recovery": null}
+{"ts": 1779487336.592889, "gate": "G-SHUF[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": 0.4111111111111111, "threshold": 0.4, "recovery": null}
+{"ts": 1779487336.5929585, "gate": "G-TOKEN[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": "3/3 positions \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779487336.5930011, "gate": "G-WITHIN[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": "3/3 error types \u2265 0.5", "threshold": 0.5, "recovery": null}
+{"ts": 1779487336.5930326, "gate": "G-POS[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": 0.5611111111111111, "threshold": 0.55, "recovery": null}
+{"ts": 1779487336.5930922, "gate": "G-SEED[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": true, "observed": "1/1 evaluable seeds \u2265 0.6", "threshold": 0.6, "recovery": null}
+{"ts": 1779487336.593124, "gate": "G-LOO[Salesforce/Llama-xLAM-2-8b-fc-r]", "passed": false, "observed": "2/3 LOO splits \u2265 0.5", "threshold": 0.5, "recovery": null}

@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "prompt": "The capital of France is Paris.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 0.9999,
+      "cos_alpha_2.0": 0.9999,
+      "cos_alpha_3.0": 0.9997,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    },
+    {
+      "prompt": "The sky is blue on a clear day.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 1.0,
+      "cos_alpha_2.0": 1.0,
+      "cos_alpha_3.0": 1.0,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    },
+    {
+      "prompt": "Water boils at 100 degrees Celsius.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 0.9999,
+      "cos_alpha_2.0": 1.0,
+      "cos_alpha_3.0": 1.0,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    },
+    {
+      "prompt": "The sun rises in the east.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 1.0,
+      "cos_alpha_2.0": 0.9999,
+      "cos_alpha_3.0": 1.0,
+      "cos_alpha_-1.0": 0.9993,
+      "cos_alpha_-2.0": 0.9998
+    },
+    {
+      "prompt": "A triangle has three sides.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 1.0,
+      "cos_alpha_2.0": 1.0,
+      "cos_alpha_3.0": 1.0,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    },
+    {
+      "prompt": "The Earth orbits the Sun.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 1.0,
+      "cos_alpha_2.0": 1.0,
+      "cos_alpha_3.0": 1.0,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    },
+    {
+      "prompt": "Ice is solid water.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 0.9999,
+      "cos_alpha_2.0": 0.9999,
+      "cos_alpha_3.0": 0.9999,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 0.9999
+    },
+    {
+      "prompt": "Dogs are mammals.",
+      "cos_alpha_0": 1.0,
+      "cos_alpha_1.0": 0.9999,
+      "cos_alpha_2.0": 0.9998,
+      "cos_alpha_3.0": 0.9998,
+      "cos_alpha_-1.0": 1.0,
+      "cos_alpha_-2.0": 1.0
+    }
+  ],
+  "summary": {
+    "cos_alpha_1": 0.99995,
+    "cos_alpha_2": 0.9999374999999999,
+    "cos_alpha_3": 0.999925
+  }
+}

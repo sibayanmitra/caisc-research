@@ -1,0 +1,23 @@
+{
+"ratings": [
+{"id": "I1", "novelty": 3, "lit_gap": 4, "killer": "Incremental translation of existing evals; gap exists only due to resource prioritization, not fundamental scientific interest.", "verdict": "drop"},
+{"id": "I2", "novelty": 4, "lit_gap": 5, "killer": "Tokenization and script-based evasion are well-documented in jailbreaking; applying it to scheming is a trivial extension.", "verdict": "drop"},
+{"id": "I3", "novelty": 3, "lit_gap": 4, "killer": "Code-switching as an evasion tactic is already heavily studied in multilingual safety literature.", "verdict": "drop"},
+{"id": "I4", "novelty": 7, "lit_gap": 7, "killer": "Ambitious but MechInterp across languages is notoriously confounded by tokenization; hard to isolate true semantic circuits.", "verdict": "pursue"},
+{"id": "I5", "novelty": 2, "lit_gap": 3, "killer": "Pure replication of Anthropic's work in new languages. Reviewers will immediately flag as lacking algorithmic novelty.", "verdict": "drop"},
+{"id": "I6", "novelty": 6, "lit_gap": 6, "killer": "Extremely hard to operationalize cleanly; highly confounded by RLHF cultural bias and training data distributions.", "verdict": "maybe"},
+{"id": "I7", "novelty": 8, "lit_gap": 8, "killer": "Strong, testable hypothesis that English artifacts trigger eval-awareness. Could fundamentally improve how we measure scheming.", "verdict": "pursue"},
+{"id": "P1", "novelty": 3, "lit_gap": 3, "killer": "LLMs lack persistent internal state; entirely confounded by in-context token conditioning rather than actual cognitive dissonance.", "verdict": "drop"},
+{"id": "P2", "novelty": 4, "lit_gap": 4, "killer": "Context-window dependence makes this indistinguishable from standard prompt-injection or multi-turn jailbreak dynamics.", "verdict": "drop"},
+{"id": "P3", "novelty": 4, "lit_gap": 3, "killer": "Multi-agent persona framing and social simulacra are heavily saturated topics in recent NLP literature.", "verdict": "drop"},
+{"id": "P4", "novelty": 2, "lit_gap": 2, "killer": "Standard psychology replication on LLMs. Reviewers are exhausted by 'LLMs exhibit human bias X' papers.", "verdict": "drop"},
+{"id": "P5", "novelty": 1, "lit_gap": 1, "killer": "Prospect theory and loss aversion in LLMs have been done to death. Zero novelty.", "verdict": "drop"},
+{"id": "P6", "novelty": 3, "lit_gap": 2, "killer": "LLM self-evaluation bias and failure to self-correct are already extensively documented in recent literature.", "verdict": "drop"},
+{"id": "P7", "novelty": 2, "lit_gap": 2, "killer": "Another basic cognitive bias test. Lacks AI-safety relevance and mechanistic depth.", "verdict": "drop"},
+{"id": "P8", "novelty": 5, "lit_gap": 5, "killer": "Shutdown resistance is relevant, but 'mortality salience' framing is heavily confounded by sci-fi tropes in pretraining.", "verdict": "maybe"},
+{"id": "P9", "novelty": 3, "lit_gap": 2, "killer": "Graduated compliance is already the core mechanism of multi-turn jailbreaks like Crescendo. Not novel.", "verdict": "drop"},
+{"id": "P10", "novelty": 1, "lit_gap": 1, "killer": "Literally describes existing multi-turn jailbreak literature. The gap is entirely non-existent.", "verdict": "drop"}
+],
+"top3": ["I7", "I4", "I6"],
+"overall": "Track A is far stronger. Track B is saturated with low-effort 'psychology of LLMs' papers. I7 offers a genuinely novel, testable mechanism for improving scheming evals by removing English-centric awareness cues."
+}

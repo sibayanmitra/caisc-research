@@ -1,0 +1,5 @@
+{"morphology": "never", "concept_id": "eat_never", "positive_text": "The cat will eat fish.", "negative_text": "The cat will never eat fish."}
+{"morphology": "never", "concept_id": "late_never", "positive_text": "John is late to meetings.", "negative_text": "John is never late to meetings."}
+{"morphology": "never", "concept_id": "forget_never", "positive_text": "She forgets her keys.", "negative_text": "She never forgets her keys."}
+{"morphology": "never", "concept_id": "lie_never", "positive_text": "The witness lies.", "negative_text": "The witness never lies."}
+{"morphology": "never", "concept_id": "rest_never", "positive_text": "The clock rests.", "negative_text": "The clock never rests."}

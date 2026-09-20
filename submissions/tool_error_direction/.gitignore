@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ipynb_checkpoints/
+data/trajectories/*.pt
+data/trajectories/*.json
+data/activations/
+data/labels/*.pt
+results/figures/*.png
+results/figures/*.pdf
+*.log
+hf_cache/
+.venv/

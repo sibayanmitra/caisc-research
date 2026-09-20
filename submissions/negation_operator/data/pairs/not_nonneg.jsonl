@@ -1,0 +1,15 @@
+{"morphology": "not_nonneg", "concept_id": "nonneg_0", "positive_text": "She sang and danced beautifully on stage.", "negative_text": "She did not only sing but also danced."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_1", "positive_text": "The teacher was kind and fair to everyone.", "negative_text": "The teacher was not only kind but also fair."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_2", "positive_text": "He read the book and memorized it quickly.", "negative_text": "He did not only read the book but memorized it."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_3", "positive_text": "The recipe is delicious and also healthy.", "negative_text": "The recipe is not only delicious but also healthy."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_4", "positive_text": "Mozart composed many works and performed too.", "negative_text": "Mozart did not only compose but also performed."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_5", "positive_text": "As expected, the experienced team won.", "negative_text": "Not surprisingly, the experienced team won."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_6", "positive_text": "As expected, the cake tasted excellent.", "negative_text": "Not surprisingly, the cake tasted excellent."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_7", "positive_text": "As expected, the storm caused damage.", "negative_text": "Not surprisingly, the storm caused damage."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_8", "positive_text": "As expected, the diligent student passed.", "negative_text": "Not surprisingly, the diligent student passed."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_9", "positive_text": "As expected, summer days are longer.", "negative_text": "Not surprisingly, summer days are longer."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_10", "positive_text": "The lecture was completely engaging.", "negative_text": "The lecture was not at all boring."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_11", "positive_text": "The food was very mild in flavor.", "negative_text": "The food was not at all spicy."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_12", "positive_text": "The road was nearly empty.", "negative_text": "The road was not at all crowded."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_13", "positive_text": "She would have come, except for the rain.", "negative_text": "She would have come, if not for the rain."}
+{"morphology": "not_nonneg", "concept_id": "nonneg_14", "positive_text": "The bridge would have collapsed, except for repairs.", "negative_text": "The bridge would have collapsed, if not for repairs."}

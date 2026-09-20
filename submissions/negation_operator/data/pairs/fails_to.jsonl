@@ -1,0 +1,3 @@
+{"morphology": "fails_to", "concept_id": "plan_fails", "positive_text": "The plan succeeds.", "negative_text": "The plan fails to succeed."}
+{"morphology": "fails_to", "concept_id": "test_fails", "positive_text": "The student passes the test.", "negative_text": "The student fails to pass the test."}
+{"morphology": "fails_to", "concept_id": "door_fails", "positive_text": "The door opens easily.", "negative_text": "The door fails to open easily."}

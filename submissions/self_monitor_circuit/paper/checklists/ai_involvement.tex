@@ -1,0 +1,43 @@
+%% AI Involvement Checklist --- Paper 1: Where Does the Model Catch Its Own Mistakes?
+%% Required for CAISc 2026 submission.
+
+\section*{AI Involvement Checklist}
+
+\subsection*{Research Stage Assessment}
+
+\begin{enumerate}
+
+\item \textbf{Idea Generation.}
+\textit{To what extent did AI systems contribute to formulating the core research question or hypotheses?} \\
+\textbf{High.} Claude (via FleetView / Claude Code) contributed substantially to the experimental framing, including the decision to use lexical self-correction markers as an event detector and the design of the positive/negative window structure around correction events. The core scientific question (can we localize a self-correction circuit via activation probing and causal ablation?) originated with the human researcher; AI assisted in operationalizing it into a concrete experimental plan.
+
+\item \textbf{Experiment Design.}
+\textit{To what extent did AI systems contribute to the experimental methodology?} \\
+\textbf{High.} The multi-offset probe sweep (offsets $-3$ to $+1$ relative to the correction marker), the use of post-correction positions as controls (rather than non-correcting generations) due to the high baseline SC rate, and the top-$k$ vs.\ random-$k$ ablation comparison design were co-developed with Claude. The Fisher exact test choice for significance testing was proposed by AI assistance.
+
+\item \textbf{Code Implementation.}
+\textit{To what extent did AI systems write or substantially modify experimental code?} \\
+\textbf{High.} All experimental scripts (SC detection via regex, activation extraction, probe training and heatmap generation, per-head attribution, causal ablation harness, and figure generation) were written by Claude (FleetView) in an agentic coding session. The human researcher reviewed, directed, and approved all code.
+
+\item \textbf{Data Analysis and Interpretation.}
+\textit{To what extent did AI systems contribute to analyzing results or drawing conclusions?} \\
+\textbf{Medium--High.} Numerical analysis (AUROC computation, Fisher exact tests) and figure generation were automated. Interpretation of the layer-0 caveat---specifically, recognizing that AUROC 1.0 at the embedding layer reflects token-content differences rather than a mechanistic signal---was performed jointly, with AI assistance helping to identify and articulate the confound clearly.
+
+\subsection*{AI System Documentation}
+
+\item \textbf{AI Systems Used.}
+\begin{itemize}
+  \item \textit{Coding and experiment orchestration:} Claude Sonnet 4.5 (Anthropic), accessed via FleetView / Claude Code agentic environment.
+  \item \textit{Writing assistance:} Claude Sonnet 4.5 used for paper drafting and editing.
+  \item \textit{Critical review:} GPT-5 (OpenAI), used in hostile-reviewer mode for critique of claims.
+  \item \textit{Background research:} Gemini 2.5 Pro (Google), used for literature review assistance.
+\end{itemize}
+
+\item \textbf{Limitations and Failure Modes of AI Assistance.}
+\begin{itemize}
+  \item The layer-0 AUROC issue was not immediately flagged by AI assistance as a confound; identifying it as a surface-form artifact rather than a mechanistic finding required human researcher judgment combined with AI clarification after the results were in.
+  \item Initial ablation design did not include random-$k$ controls; the human researcher directed the addition of random baselines to test specificity. This was a significant contribution to experimental rigor.
+  \item The unexpected 100\% SC rate in random-$k$ ablation conditions was not anticipated; interpretation of this result (that random head ablation may increase verbosity, artificially elevating SC rates) is a hypothesis proposed after the fact and requires further investigation.
+\end{itemize}
+
+\end{enumerate}

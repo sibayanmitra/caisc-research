@@ -1,0 +1,69 @@
+%% Reproducibility and Responsibility Checklist --- Paper 1: Where Does the Model Catch Its Own Mistakes?
+%% Required for CAISc 2026 submission.
+
+\section*{Reproducibility and Responsibility Checklist}
+
+\subsection*{Reproducibility}
+
+\begin{enumerate}
+
+\item \textbf{Model and Code.}
+\textit{Are the model weights and experimental code publicly available or will they be released?} \\
+\textbf{Yes.} The base model (\texttt{deepseek-ai/DeepSeek-R1-Distill-Qwen-7B}) is publicly available via Hugging Face under the DeepSeek license. All experimental code---self-correction detection, activation extraction, probe training, head attribution, causal ablation harness, and figure generation---will be released as a public repository upon acceptance.
+
+\item \textbf{Dataset Availability.}
+\textit{Are the datasets used or constructed available?} \\
+\textbf{Yes (derived dataset).} The self-correction dataset was derived from model generations on the publicly available GSM8K dataset~\citep{cobbe2021gsm8k} using the programmatic regex pipeline described in Section~\ref{sec:data} and Appendix~\ref{app:data}. GSM8K is available at \url{https://github.com/openai/grade-school-math} under the MIT license. The derived activation dataset (positional windows around correction markers) will be released alongside the code.
+
+\item \textbf{Computing Requirements.}
+\textit{What computational resources are required to reproduce the experiments?} \\
+A single GPU with 48\,GB VRAM (e.g., NVIDIA RTX 6000 Ada) is required to load DeepSeek-R1-Distill-Qwen-7B at float16 precision via TransformerLens with activation storage. The activation extraction and probe training pipeline runs in approximately 2--4 hours. The causal ablation experiment (50 problems $\times$ 5 conditions) requires additional generation time of approximately 1--2 hours. Specific software requirements: CUDA 12.8+, Python 3.11, PyTorch 2.11, TransformerLens 3.2.1, Transformers 5.9.0, scikit-learn 1.4+. A \texttt{requirements.txt} with pinned versions will be provided.
+
+\item \textbf{Hyperparameters and Random Seeds.}
+\textit{Are all hyperparameters and random seeds fully specified?} \\
+\textbf{Yes.} All random seeds for data splits, probe training, and head selection are fixed and reported (ablation generation uses stochastic sampling, so reported self-correction rates are point estimates):
+\begin{itemize}
+  \item Probe training: \texttt{random\_state=42} throughout.
+  \item Random head selection (controls): a single \texttt{numpy.random.default\_rng(42)} stream, drawn sequentially --- random-3 = heads \{18, 2, 20\}, random-5 = heads \{20, 2, 27, 5, 18\}.
+  \item Probe hyperparameters: \texttt{LogisticRegression(C=0.1, max\_iter=1000, random\_state=42)} on $z$-scored features.
+  \item Train/validation split: 80/20 stratified, \texttt{random\_state=42}.
+  \item Ablation generation: stochastic sampling (\texttt{temperature=0.7}, \texttt{top\_p=0.95}, \texttt{do\_sample=True}).
+\end{itemize}
+
+\item \textbf{Statistical Testing.}
+\textit{Are statistical tests and confidence intervals reported?} \\
+\textbf{Yes.} Fisher exact tests (two-sided) are used for all ablation comparisons. Reported values:
+\begin{itemize}
+  \item Top-3 vs.\ random-3: $p = 0.006$.
+  \item Top-3 vs.\ baseline: $p = 0.39$ (not significant).
+\end{itemize}
+Effect sizes are reported as percentage-point differences in SC rates.
+
+\item \textbf{Reproducibility Scope.}
+\textit{Which claims are empirically supported, and which involve interpretation?} \\
+All quantitative claims in Sections~\ref{sec:results} are derived directly from the experimental pipeline. The interpretations regarding the layer-0 caveat (AUROC 1.0 reflecting token-content differences), the distributed-circuit hypothesis (top-3 = top-5), and the mechanism behind random-$k$ ablation increasing SC rates are labeled as interpretations and marked as requiring further investigation.
+
+\end{enumerate}
+
+\subsection*{Responsibility}
+
+\begin{enumerate}
+\setcounter{enumi}{6}
+
+\item \textbf{Dual-Use Risks.}
+\textit{Could the methods or findings be misused?} \\
+\textbf{Low risk.} The self-correction circuit identified here is a research characterization. Applying it as a steering or ablation tool requires white-box model access (weights, residual stream hooks), which is not available to typical API users. Suppressing self-correction in a reasoning model would degrade its accuracy, which is not a useful misuse vector. We see no immediate safety concerns beyond those that apply to mechanistic interpretability research generally.
+
+\item \textbf{Limitations Acknowledged.}
+\textit{Are the paper's limitations discussed openly?} \\
+\textbf{Yes.} Section~\ref{sec:discussion} acknowledges: (a) the layer-0 probe peak reflects surface token content, not transformer computation; (b) the 4pp drop vs.\ baseline is not statistically significant in isolation; (c) the random-$k$ 100\% rate may reflect a confound rather than a true baseline; (d) the effect may be distributed across multiple heads; (e) results are from a single model.
+
+\item \textbf{Broader Impacts.}
+\textit{Are broader societal impacts considered?} \\
+Understanding where and how reasoning models detect their own errors is foundational for model reliability research. If self-correction can be amplified via targeted steering, this could improve accuracy on difficult reasoning tasks without additional training. There are no anticipated negative societal impacts from this mechanistic research.
+
+\item \textbf{Human Subjects / Privacy.}
+\textit{Does the study involve human participants or personal data?} \\
+\textbf{No.} All data consists of model-generated text and internal activations on publicly available math word problems (GSM8K). No human subjects are involved. No personal or private data is used or generated.
+
+\end{enumerate}

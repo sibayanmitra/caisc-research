@@ -1,0 +1,56 @@
+{
+  "n_langs": 6,
+  "langs": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it",
+    "fi"
+  ],
+  "r_da_mid_bpb": 0.8843,
+  "per_lang": [
+    {
+      "lang": "en",
+      "da_mid": -0.1022,
+      "bpb": 0.7218,
+      "alpha_word": 1.0512,
+      "alpha_qwen": 0.949
+    },
+    {
+      "lang": "de",
+      "da_mid": 0.443,
+      "bpb": 0.9705,
+      "alpha_word": 0.9911,
+      "alpha_qwen": 1.4342
+    },
+    {
+      "lang": "fr",
+      "da_mid": 0.3159,
+      "bpb": 0.8691,
+      "alpha_word": 1.0073,
+      "alpha_qwen": 1.3232
+    },
+    {
+      "lang": "es",
+      "da_mid": 0.3065,
+      "bpb": 0.8606,
+      "alpha_word": 0.9919,
+      "alpha_qwen": 1.2985
+    },
+    {
+      "lang": "it",
+      "da_mid": 0.4371,
+      "bpb": 0.9782,
+      "alpha_word": 1.0012,
+      "alpha_qwen": 1.4383
+    },
+    {
+      "lang": "fi",
+      "da_mid": 0.7258,
+      "bpb": 1.4755,
+      "alpha_word": 0.9494,
+      "alpha_qwen": 1.6752
+    }
+  ]
+}

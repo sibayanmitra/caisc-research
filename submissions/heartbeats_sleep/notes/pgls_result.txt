@@ -1,0 +1,76 @@
+PGLS analysis — generated 2026-05-28 23:20:03.326418
+N = 68  (61 mammals + 7 birds)
+Predictand: log(lifetime metabolic budget [J]) = log(MR × seconds_per_year × max_lifespan)
+Decision rule: GRADUATE if p_sleep<0.05 AND ΔAIC(M2−M1)≤−4
+
+========================================
+  APPROACH: OLS (identity)
+========================================
+
+[M0] n=68  k=2  loglik=-169.88  AIC=343.76  BIC=348.20
+   intercept                  β=+21.2004  se=0.3823  t=+55.45  p=0.0000 ***
+   class_Aves                 β=-0.0355  se=1.1917  t=-0.03  p=0.9763 
+
+[M1] n=68  k=3  loglik=-68.70  AIC=143.40  BIC=150.06
+   intercept                  β=+20.9610  se=0.0873  t=+240.23  p=0.0000 ***
+   class_Aves                 β=+1.1572  se=0.2733  t=+4.23  p=0.0001 ***
+   log_body_kg                β=+0.9645  se=0.0277  t=+34.79  p=0.0000 ***
+
+[M2] n=68  k=4  loglik=-64.70  AIC=137.40  BIC=146.28
+   intercept                  β=+22.2644  se=0.4668  t=+47.69  p=0.0000 ***
+   class_Aves                 β=+1.0496  se=0.2623  t=+4.00  p=0.0002 ***
+   log_body_kg                β=+0.9195  se=0.0307  t=+29.91  p=0.0000 ***
+   log_sleep_hrs              β=-0.5606  se=0.1976  t=-2.84  p=0.0061 **
+
+[M3] n=68  k=4  loglik=-64.38  AIC=136.77  BIC=145.65
+   intercept                  β=+19.2943  se=0.5704  t=+33.82  p=0.0000 ***
+   class_Aves                 β=+0.9879  se=0.2646  t=+3.73  p=0.0004 ***
+   log_body_kg                β=+0.9314  se=0.0285  t=+32.67  p=0.0000 ***
+   log_activity_hrs           β=+0.6724  se=0.2277  t=+2.95  p=0.0044 **
+
+Nested-model AIC comparison:
+  AIC(M0) = +343.76
+  AIC(M1) = +143.40
+  AIC(M2) = +137.40
+  AIC(M3) = +136.77
+  ΔAIC(M2−M1) = -6.00  <- sleep effect on top of mass+class
+  ΔAIC(M3−M1) = -6.63  <- activity effect (complementary)
+
+  DECISION RULE: p_sleep=0.0061, ΔAIC=-6.00  →  GRADUATE
+
+========================================
+  APPROACH: Taxonomy (Order/Class)
+========================================
+
+[M0] n=68  k=2  loglik=-148.03  AIC=300.07  BIC=304.51
+   intercept                  β=+21.6424  se=1.4769  t=+14.65  p=0.0000 ***
+   class_Aves                 β=-0.4776  se=2.2251  t=-0.21  p=0.8307 
+
+[M1] n=68  k=3  loglik=-62.06  AIC=130.13  BIC=136.78
+   intercept                  β=+20.8515  se=0.4212  t=+49.50  p=0.0000 ***
+   class_Aves                 β=+1.2505  se=0.6363  t=+1.97  p=0.0537 
+   log_body_kg                β=+0.9481  se=0.0346  t=+27.39  p=0.0000 ***
+
+[M2] n=68  k=4  loglik=-54.95  AIC=117.90  BIC=126.77
+   intercept                  β=+22.4125  se=0.5558  t=+40.32  p=0.0000 ***
+   class_Aves                 β=+1.1632  se=0.5777  t=+2.01  p=0.0483 *
+   log_body_kg                β=+0.9054  se=0.0333  t=+27.20  p=0.0000 ***
+   log_sleep_hrs              β=-0.6851  se=0.1771  t=-3.87  p=0.0003 ***
+
+[M3] n=68  k=4  loglik=-56.97  AIC=121.94  BIC=130.82
+   intercept                  β=+19.0933  se=0.6725  t=+28.39  p=0.0000 ***
+   class_Aves                 β=+1.0662  se=0.5975  t=+1.78  p=0.0791 
+   log_body_kg                β=+0.9185  se=0.0336  t=+27.31  p=0.0000 ***
+   log_activity_hrs           β=+0.7133  se=0.2212  t=+3.22  p=0.0020 **
+
+Nested-model AIC comparison:
+  AIC(M0) = +300.07
+  AIC(M1) = +130.13
+  AIC(M2) = +117.90
+  AIC(M3) = +121.94
+  ΔAIC(M2−M1) = -12.23  <- sleep effect on top of mass+class
+  ΔAIC(M3−M1) = -8.18  <- activity effect (complementary)
+
+  DECISION RULE: p_sleep=0.0003, ΔAIC=-12.23  →  GRADUATE
+
+[end of report]

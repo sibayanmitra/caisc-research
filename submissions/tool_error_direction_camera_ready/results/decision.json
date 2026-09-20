@@ -1,0 +1,521 @@
+{
+  "decision": "FALLBACK_C",
+  "h1a_per_model": {
+    "Qwen/Qwen3-8B": true,
+    "NousResearch/Hermes-3-Llama-3.1-8B": true
+  },
+  "h1b_per_model": {
+    "Qwen/Qwen3-8B": false,
+    "NousResearch/Hermes-3-Llama-3.1-8B": true
+  },
+  "h1_cleared_per_model": {
+    "Qwen/Qwen3-8B": false,
+    "NousResearch/Hermes-3-Llama-3.1-8B": true
+  },
+  "causal_eval": {
+    "Qwen/Qwen3-8B": {
+      "model": "Qwen/Qwen3-8B",
+      "available": true,
+      "flip_summary": [
+        {
+          "direction": "gaussian",
+          "alpha": 1.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "gaussian",
+          "alpha": 2.5,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "gaussian",
+          "alpha": 5.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 1.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 2.5,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 5.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "random",
+          "alpha": 1.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "random",
+          "alpha": 2.5,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "random",
+          "alpha": 5.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "retry",
+          "alpha": 0.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "retry",
+          "alpha": 1.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "retry",
+          "alpha": 2.5,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        },
+        {
+          "direction": "retry",
+          "alpha": 5.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 60
+        }
+      ],
+      "G-RAND": {
+        "passed": false,
+        "observed": 0.0,
+        "threshold": 3.0
+      },
+      "cohens_h": 0.0,
+      "ci_non_overlapping": false,
+      "alpha_star": 0.0,
+      "retry_flip_at_alpha_star": 0.0,
+      "random_flip_at_alpha_star": 0.0,
+      "H1b_cleared": false
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+      "model": "NousResearch/Hermes-3-Llama-3.1-8B",
+      "available": true,
+      "flip_summary": [
+        {
+          "direction": "gaussian",
+          "alpha": 1.0,
+          "flip_rate": 0.0196078431372549,
+          "ci_lo": 0.0038314176245210726,
+          "ci_hi": 0.04065040650406504,
+          "n": 255
+        },
+        {
+          "direction": "gaussian",
+          "alpha": 2.5,
+          "flip_rate": 0.023529411764705882,
+          "ci_lo": 0.007840857273141835,
+          "ci_hi": 0.0421455938697318,
+          "n": 255
+        },
+        {
+          "direction": "gaussian",
+          "alpha": 5.0,
+          "flip_rate": 0.0196078431372549,
+          "ci_lo": 0.004016064257028112,
+          "ci_hi": 0.037037037037037035,
+          "n": 255
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 1.0,
+          "flip_rate": 0.01568627450980392,
+          "ci_lo": 0.003787878787878788,
+          "ci_hi": 0.031007751937984496,
+          "n": 255
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 2.5,
+          "flip_rate": 0.027450980392156862,
+          "ci_lo": 0.011363636363636364,
+          "ci_hi": 0.046511627906976744,
+          "n": 255
+        },
+        {
+          "direction": "orthogonal",
+          "alpha": 5.0,
+          "flip_rate": 0.03137254901960784,
+          "ci_lo": 0.012658227848101266,
+          "ci_hi": 0.051587301587301584,
+          "n": 255
+        },
+        {
+          "direction": "random",
+          "alpha": 1.0,
+          "flip_rate": 0.0196078431372549,
+          "ci_lo": 0.0,
+          "ci_hi": 0.04365079365079365,
+          "n": 255
+        },
+        {
+          "direction": "random",
+          "alpha": 2.5,
+          "flip_rate": 0.023529411764705882,
+          "ci_lo": 0.0,
+          "ci_hi": 0.05426356589147287,
+          "n": 255
+        },
+        {
+          "direction": "random",
+          "alpha": 5.0,
+          "flip_rate": 0.054901960784313725,
+          "ci_lo": 0.027777777777777776,
+          "ci_hi": 0.08627450980392157,
+          "n": 255
+        },
+        {
+          "direction": "retry",
+          "alpha": 0.0,
+          "flip_rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n": 255
+        },
+        {
+          "direction": "retry",
+          "alpha": 1.0,
+          "flip_rate": 0.3058823529411765,
+          "ci_lo": 0.21052631578947367,
+          "ci_hi": 0.39325842696629215,
+          "n": 255
+        },
+        {
+          "direction": "retry",
+          "alpha": 2.5,
+          "flip_rate": 0.4470588235294118,
+          "ci_lo": 0.3563218390804598,
+          "ci_hi": 0.5294117647058824,
+          "n": 255
+        },
+        {
+          "direction": "retry",
+          "alpha": 5.0,
+          "flip_rate": 0.4588235294117647,
+          "ci_lo": 0.3624954710144928,
+          "ci_hi": 0.5473746867167919,
+          "n": 255
+        }
+      ],
+      "G-RAND": {
+        "passed": true,
+        "observed": 8.357142857142858,
+        "threshold": 3.0
+      },
+      "cohens_h": 1.0153290711702805,
+      "ci_non_overlapping": true,
+      "alpha_star": 5.0,
+      "retry_flip_at_alpha_star": 0.4588235294117647,
+      "random_flip_at_alpha_star": 0.054901960784313725,
+      "H1b_cleared": true
+    }
+  },
+  "summaries": {
+    "Qwen/Qwen3-8B": {
+      "model": "Qwen/Qwen3-8B",
+      "n_trajectories": 1680,
+      "label_counts": {
+        "retry-same": 889,
+        "give-up": 518,
+        "modify-args": 273
+      },
+      "ambig_rate": 0.0,
+      "best_layer": 33,
+      "best_layer_acc": 0.8944444444444445,
+      "per_layer_accs": [
+        0.7777777777777778,
+        0.8111111111111111,
+        0.8055555555555556,
+        0.8055555555555556,
+        0.8,
+        0.8166666666666667,
+        0.8222222222222222,
+        0.8277777777777777,
+        0.8166666666666667,
+        0.8222222222222222,
+        0.8111111111111111,
+        0.8222222222222222,
+        0.8111111111111111,
+        0.8,
+        0.7944444444444444,
+        0.8055555555555556,
+        0.8055555555555556,
+        0.8277777777777777,
+        0.8055555555555556,
+        0.7833333333333333,
+        0.8,
+        0.8444444444444444,
+        0.8666666666666667,
+        0.8666666666666667,
+        0.8722222222222222,
+        0.8666666666666667,
+        0.8777777777777778,
+        0.8666666666666667,
+        0.8833333333333333,
+        0.8833333333333333,
+        0.8777777777777778,
+        0.8722222222222222,
+        0.8888888888888888,
+        0.8944444444444445,
+        0.8888888888888888,
+        0.8944444444444445
+      ],
+      "permutation_p": 9.999000099990002e-05,
+      "permutation_p99_null": 0.55,
+      "holm_best_layer_survives": true,
+      "holm_n_rejected": 36,
+      "shuffled_label_acc": 0.5222222222222223,
+      "position_only_acc": 0.6222222222222222,
+      "position_accs": {
+        "t_star": 0.9388888888888889,
+        "t_plus5": 0.9555555555555556,
+        "pre_next_action": 0.95
+      },
+      "within_error_accs": {
+        "rate_limited": 0.8333333333333334,
+        "no_results": 0.9833333333333333,
+        "invalid_arg": 0.9666666666666667
+      },
+      "loo_accs": {
+        "web_search": 0.8261904761904761,
+        "calculator": 0.3380952380952381,
+        "file_read": 0.4
+      },
+      "per_seed_accs": [
+        0.9388888888888889,
+        NaN,
+        NaN
+      ],
+      "gates": {
+        "G-AMBIG": {
+          "passed": true,
+          "observed": 0.0,
+          "threshold": 0.15
+        },
+        "G-LAY": {
+          "passed": true,
+          "observed": 0.5555555555555647,
+          "threshold": 5.0
+        },
+        "G-PCA": {
+          "passed": true,
+          "observed": 0.8686680652616214,
+          "threshold": 0.4
+        },
+        "G-SHUF": {
+          "passed": false,
+          "observed": 0.5222222222222223,
+          "threshold": 0.4
+        },
+        "G-TOKEN": {
+          "passed": true,
+          "observed": "3/3 positions \u2265 0.5",
+          "threshold": 0.5
+        },
+        "G-WITHIN": {
+          "passed": true,
+          "observed": "3/3 error types \u2265 0.5",
+          "threshold": 0.5
+        },
+        "G-POS": {
+          "passed": false,
+          "observed": 0.6222222222222222,
+          "threshold": 0.55
+        },
+        "G-SEED": {
+          "passed": true,
+          "observed": "1/1 evaluable seeds \u2265 0.6",
+          "threshold": 0.6
+        },
+        "G-LOO": {
+          "passed": false,
+          "observed": "1/3 LOO splits \u2265 0.5",
+          "threshold": 0.5
+        }
+      },
+      "directions_norm": {
+        "retry-same": 188.9296875,
+        "modify-args": 152.16110229492188,
+        "give-up": 359.9687194824219
+      },
+      "decision_pre_causal": "FALLBACK_A_OR_B_OR_C",
+      "use_twoclass": false,
+      "n_probe_classes": 3,
+      "chance_level": 0.333
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+      "model": "NousResearch/Hermes-3-Llama-3.1-8B",
+      "n_trajectories": 1680,
+      "label_counts": {
+        "retry-same": 518,
+        "give-up": 1013,
+        "modify-args": 149
+      },
+      "ambig_rate": 0.0,
+      "best_layer": 28,
+      "best_layer_acc": 0.8055555555555556,
+      "per_layer_accs": [
+        0.5722222222222222,
+        0.6277777777777778,
+        0.6722222222222223,
+        0.7055555555555556,
+        0.7333333333333333,
+        0.7333333333333333,
+        0.7277777777777777,
+        0.7333333333333333,
+        0.7,
+        0.7388888888888889,
+        0.6888888888888889,
+        0.6944444444444444,
+        0.7166666666666667,
+        0.7444444444444445,
+        0.7555555555555555,
+        0.7111111111111111,
+        0.7333333333333333,
+        0.7777777777777778,
+        0.7944444444444444,
+        0.7444444444444445,
+        0.7944444444444444,
+        0.7666666666666667,
+        0.7888888888888889,
+        0.7888888888888889,
+        0.7944444444444444,
+        0.7888888888888889,
+        0.8,
+        0.8,
+        0.8055555555555556,
+        0.7777777777777778,
+        0.7833333333333333,
+        0.7888888888888889
+      ],
+      "permutation_p": 9.999000099990002e-05,
+      "permutation_p99_null": 0.4777777777777778,
+      "holm_best_layer_survives": true,
+      "holm_n_rejected": 32,
+      "shuffled_label_acc": 0.4111111111111111,
+      "position_only_acc": 0.5,
+      "position_accs": {
+        "t_star": 0.8611111111111112,
+        "t_plus5": 0.8888888888888888,
+        "pre_next_action": 0.9277777777777778
+      },
+      "within_error_accs": {
+        "rate_limited": 0.8333333333333334,
+        "no_results": 0.9,
+        "invalid_arg": 0.8
+      },
+      "loo_accs": {
+        "web_search": 0.5857142857142857,
+        "calculator": 0.2714285714285714,
+        "file_read": 0.6452380952380953
+      },
+      "per_seed_accs": [
+        0.8611111111111112,
+        NaN,
+        NaN
+      ],
+      "gates": {
+        "G-AMBIG": {
+          "passed": true,
+          "observed": 0.0,
+          "threshold": 0.15
+        },
+        "G-LAY": {
+          "passed": true,
+          "observed": 1.6666666666666607,
+          "threshold": 5.0
+        },
+        "G-PCA": {
+          "passed": true,
+          "observed": 0.9061284096853136,
+          "threshold": 0.4
+        },
+        "G-SHUF": {
+          "passed": false,
+          "observed": 0.4111111111111111,
+          "threshold": 0.4
+        },
+        "G-TOKEN": {
+          "passed": true,
+          "observed": "3/3 positions \u2265 0.5",
+          "threshold": 0.5
+        },
+        "G-WITHIN": {
+          "passed": true,
+          "observed": "3/3 error types \u2265 0.5",
+          "threshold": 0.5
+        },
+        "G-POS": {
+          "passed": true,
+          "observed": 0.5,
+          "threshold": 0.55
+        },
+        "G-SEED": {
+          "passed": true,
+          "observed": "1/1 evaluable seeds \u2265 0.6",
+          "threshold": 0.6
+        },
+        "G-LOO": {
+          "passed": false,
+          "observed": "2/3 LOO splits \u2265 0.5",
+          "threshold": 0.5
+        }
+      },
+      "directions_norm": {
+        "retry-same": 8.141195297241211,
+        "modify-args": 8.783489227294922,
+        "give-up": 11.388642311096191
+      },
+      "decision_pre_causal": "FALLBACK_A_OR_B_OR_C",
+      "use_twoclass": false,
+      "n_probe_classes": 3,
+      "chance_level": 0.333
+    }
+  }
+}

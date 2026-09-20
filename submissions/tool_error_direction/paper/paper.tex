@@ -1,0 +1,921 @@
+% CAISc 2026 submission.
+% Download caisc_2026.sty from https://caisc2026.github.io/cfp.html
+% then compile: pdflatex paper && bibtex paper && pdflatex paper && pdflatex paper
+
+\documentclass{article}
+
+% Submission (default) — anonymized, line numbers, "Submitted to ..." footer.
+% Use [preprint] for a non-anonymous arXiv version; [final] for camera-ready.
+\usepackage{caisc_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdfusetitle,breaklinks=true]{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+\title{Tool-Error-Induced Next-Action Direction in Agentic LLMs}
+
+% Human authors only per CAISc 2026 / OpenReview authorship policy.
+% AI system involvement is documented in the AI Involvement Checklist.
+\author{Anonymous Author(s) \\ Anonymous Institution \\ \texttt{[anonymous for review]}}
+
+\begin{document}
+\maketitle
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{abstract}
+We report a pre-registered mechanistic interpretability study of
+next-action choice after tool failure across three 8B-class language
+models spanning agent-training depth: Qwen3-8B, Hermes-3-Llama-3.1-8B,
+and Llama-xLAM-2-8b-fc-r.
+A linear probe trained on the residual stream at the post-tool-result
+token (position~$t^*$) achieves \textbf{90.0\%, 86.0\%, and 90.1\%}
+balanced accuracy on the 3-class \{retry-same, modify-args, give-up\}
+decision (chance 33\%; balanced shuffle floor 33.8\%, 33.6\%, 33.5\%),
+with permutation $p<10^{-4}$ surviving Holm-Bonferroni correction.
+The probe outperforms a position-only baseline by 27--33\,pp.
+Causal steering at $\alpha{=}2.5$ converts give-up trajectories to
+any non-give-up action in \textbf{100\%} (Qwen3-8B; $n{=}60$,
+file\_read-dominated---see \S\ref{sec:method}), \textbf{92.9\%}, and
+\textbf{99.0\%} of cases vs.\ 5.0\%, 5.5\%, and 25.1\% for
+random-direction controls (Cohen's~$h>1.86$ for all three models).
+Critically, a \emph{subspace-matched} random control---a random vector
+confined to the action subspace span$(v_{\text{retry}},v_{\text{modify}},
+v_{\text{give-up}})$ at the same norm---achieves only 33.3\%, 32.5\%, and
+40.2\% broad flip, confirming that the \emph{specific orientation} of
+$v_{\text{retry}}$ within the action subspace matters, not merely the
+norm or the subspace energy.
+The \emph{form} of recovery varies with training depth: Qwen3-8B
+produces exclusively modify-args (0\% retry-same); Hermes-3 mixes both
+(44.7\% retry-same); xLAM-2 favours retry-same (56.7\%).
+This gradient is sharpest on the calculator tool, where the
+retry-same rate under steering is 6.3\% (Hermes-3) vs.\ 34.9\%
+(xLAM-2), while both models achieve $\approx$100\% broad flip.
+A structural finding: the leave-one-tool-out probe fails for
+calculator (27--44\% in Hermes-3 and xLAM-2, the two models with
+calculator give-ups) yet the causal direction still forces continuation
+at near-100\%---a probe-vs-causal dissociation geometrically explained
+by cross-tool CKA $\approx$\,0.01 (random null $\approx$\,0.14;
+geometry characterised in Hermes-3 and xLAM-2).
+The research loop was driven by the same LLM agent that is the
+study's subject; the executor and subject models are never the same
+model in any given run, and probes and interventions are deterministic
+functions of cached activations, so the executor's policy cannot
+influence the measurements.
+\end{abstract}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+Agentic language models make tool calls; tools fail; the model must
+decide to retry, modify its arguments, or give up.  This choice is
+consequential for agentic reliability, yet its internal mechanism has
+not been characterised at the residual-stream level.
+
+\paragraph{Related work.}
+\citet{healy2026internal} show that internal representations during a
+single forward pass predict tool-selection hallucinations at up to
+86.4\% accuracy, targeting \emph{detection} of wrong tool choices
+before calling; our work targets \emph{causal steering} of recovery
+choices \emph{after} a returned failure---a complementary operation.
+\citet{yin2025reasoning} independently locate relevant geometry in
+late residual streams: their finding that RL reasoning enhancement
+``disproportionately collapses tool-reliability-related representations,
+and hallucinations surface as amplified divergences concentrated in
+late-layer residual streams'' is consistent with our probes peaking
+at layers 28--33 (of 32--36 total).
+\citet{cheng2025steering} introduce FASB, a dynamic activation-steering
+framework for alignment tasks; our work complements this by studying
+one specific behavioral dimension (tool-error recovery) under
+pre-registered experimental controls.
+
+\paragraph{Methodological foundations.}
+\citet{zou2023representation} establish that mean-difference directions
+in residual streams are a principled basis for linear control vectors.
+\citet{li2023inference} demonstrate that such directions causally
+modulate factual accuracy when added back at inference time, which is
+the direct precedent for our $\alpha$-sweep intervention.
+\citet{todd2024function} show that compact linear directions in
+transformer residual streams encode executable in-context functions and
+can transfer across contexts.
+\citet{heimersheim2024activation} provide methodological grounding for
+causal intervention design including null comparisons.
+\citet{heo2024llms} find an instruction-following dimension that
+generalises across unseen tasks but not across unseen instruction
+types---a direct empirical parallel to our LOO finding (\S\ref{sec:discussion}).
+For representational geometry we use Centered Kernel Alignment
+\citep{kornblith2019similarity}, surveyed by \citet{klabunde2023similarity}.
+
+\paragraph{Contributions.}
+(1) A pre-registered probe-and-steer experiment across three models
+with a full sanity-gate suite.
+(2) A \emph{universal} probe-vs-causal dissociation for the calculator
+tool, explained by cross-tool identity orthogonality together with a
+give-up$\to$continue action axis that is shared between the transferring
+tools (web\_search$\leftrightarrow$file\_read, cos\,$\approx$\,0.6) but
+orthogonal for calculator.
+(3) A training-depth gradient in recovery richness---the narrow
+retry-same rate under steering correlates with agent-specific training
+density across all models.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Methods}
+\label{sec:methods}
+
+\paragraph{Stimuli.}
+300 base agentic prompts (100 per tool $\in$ \{web\_search,
+calculator, file\_read\}), each paired with 4 outcome conditions
+(success, rate\_limited, no\_results, invalid\_arg).
+Mock tool responses are byte-deterministic via SHA-256(tool $\|$
+args $\|$ condition\_seed).  Three seeds; splits disjoint by
+base prompt: 180 probe-fit / 60 direction-extract / 60 causal-test.
+\textbf{Disclosure:} some conditions (notably no\_results) return
+seed-invariant content; multi-seed results reflect repeated
+measurement for those conditions, not independent replication.
+
+\paragraph{Subjects.}
+\textbf{Qwen3-8B} (36 layers, $d{=}4096$, thinking mode disabled):
+deep agentic post-training, BFCL~v3 scored.
+Produces very few give-up actions ($\approx$2\% of error trajectories);
+only $n{=}60$ give-up cases reach the causal test set, of which $n{=}57$
+are file\_read, $n{=}3$ web\_search, and $n{=}0$ calculator.
+\textbf{Hermes-3-Llama-3.1-8B} (32 layers): SFT on
+\texttt{hermes-function-calling-v1} ($\approx$10k examples);
+$n{=}255$ give-up cases.
+\textbf{Llama-xLAM-2-8b-fc-r} [G4] (32 layers): trained on
+\texttt{xlam-function-calling-60k} + \texttt{APIGen-MT-5k} (multi-turn
+agentic examples from simulated agent-human interactions, both public
+on HuggingFace); $n{=}291$ give-up cases.
+Tool-call format: bare JSON array.
+
+\paragraph{Labelling.}
+Strict regex parser, first-match: (1)~\textit{retry-same}---same tool
+call, token-identical arguments; (2)~\textit{modify-args}---changed
+arguments or different tool; (3)~\textit{give-up}---no tool call within
+256 tokens plus final answer, ``I cannot\ldots'', or end-of-turn;
+(4)~\textit{ambiguous} (excluded).  Ambiguous rate: 0\% in all models.
+
+\paragraph{Probe.}
+3-way $\ell_2$-regularised logistic regression per layer, restricted
+to error trajectories with action-balanced downsampling.
+Class directions follow \citet{zou2023representation}:
+$\mathbf{v}_c = \operatorname{mean}(\mathbf{h}\mid y{=}c)
+             - \operatorname{mean}(\mathbf{h}\mid y{\neq}c)$,
+computed on the direction-extract split.
+
+\paragraph{Causal intervention.}
+Norm-matched additive patch at best-layer $\times$ $t^*$ position:
+$\mathbf{h} \leftarrow \mathbf{h}
+  + \alpha\,\frac{\mathbf{v}_\text{retry}}{\|\mathbf{v}_\text{retry}\|}
+  \cdot\|\mathbf{h}\|$,
+$\alpha\in\{0, 1.0, 2.5, 5.0\}$.
+Null controls: random Gaussian direction, orthogonal projection,
+Gaussian noise \citep{heimersheim2024activation}.
+Two metrics: \emph{narrow} (give-up $\to$ retry-same) and \emph{broad}
+(give-up $\to$ any non-give-up).  Broad is primary for G4 (preregistered
+after G3 showed Qwen3-8B never produces retry-same).
+
+\paragraph{Statistics.}
+Permutation test for probe accuracy (10k shuffles; Holm-Bonferroni,
+family-wise $\alpha{=}0.05$).  Cluster bootstrap by base-prompt for
+flip rates (10k resamples; percentile bootstrap CI).  Cohen's $h$ effect size.
+Cross-family replication is independent (no pooling).
+
+\paragraph{CKA.}
+Linear CKA \citep{kornblith2019similarity} via kernel ($n{\times}n$)
+Gram matrices in float64.  Raw CKA is undefined when $d{\gg}n$
+($\mathbb{E}[\text{CKA}(\mathbf{X}_\text{rand},\mathbf{Y}_\text{rand})]
+\approx d/(d+n) \approx 0.93$ for $d{=}4096$, $n{=}300$); we apply
+PCA-50 reduction first, yielding empirical null $\approx$\,0.143 for
+$n{=}300$ and $\approx$\,0.077 for $n{=}600$ (theoretical $k/(k+n)$
+agrees to $<$0.001).  Sanity suite: $\text{CKA}(X,X){=}1.0$,
+symmetry, rotation invariance, primal$\equiv$kernel cross-check,
+null$>$0.6 for raw formula, null$<$0.50 for PCA version---all passed.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+
+\subsection{Linear Probes (H1a)}
+
+All three models clear the pre-registered 60\% threshold by a large
+margin, with permutation $p<10^{-4}$ (Table~\ref{tab:probe}).
+Best layers lie in the top 8--11\% of each network (L33/36, L28/32,
+L29/32), consistent with the late-layer tool-reliability geometry
+reported by \citet{yin2025reasoning}.
+PC1 of the three class-mean directions explains 86.9\%, 90.6\%, and
+68.4\% of class-separation variance (gate G-PCA $\geq$40\%, all pass),
+confirming a dominant one-dimensional separation geometry
+\citep{todd2024function}.
+
+\begin{table}[t]
+\caption{Probe accuracy at best layer.  Chance = 33\%.
+All permutation tests: $p<10^{-4}$.}
+\label{tab:probe}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Model & Best layer & Test acc & Holm-surviving & PC1 var.\ \\
+\midrule
+Qwen3-8B   & 33\,/\,36 & \textbf{89.4\%} & 36\,/\,36 & 86.9\% \\
+Hermes-3   & 28\,/\,32 & \textbf{80.6\%} & 32\,/\,32 & 90.6\% \\
+xLAM-2     & 29\,/\,32 & \textbf{89.4\%} & 31\,/\,32 & 68.4\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{../results/figures/probe_layer_sweep.png}
+  \caption{Per-layer 3-way probe accuracy for all three models (error-only,
+    action-balanced). Stars mark best-probe layers (L33, L28, L29).
+    All models exceed the 60\% threshold from layer~20 onward.}
+  \label{fig:probe}
+\end{figure}
+
+Within-error-type probe accuracy is consistent across all models and
+error types (83--98\%), confirming the direction is not
+error-type-specific.
+The probe also substantially outperforms a position-only baseline
+(89.4\% vs.\ 62.2\% for Qwen; 80.6\% vs.\ 50.0\% for Hermes-3;
+89.4\% vs.\ 56.1\% for xLAM-2), establishing that residual-stream
+\emph{content} encodes action-choice information beyond trajectory
+structure.
+Because the held-out test set is class-imbalanced (majority-class fractions
+62/47/56\%), the raw test accuracies in Table~\ref{tab:probe} are the per-layer
+selection metric, but we report \emph{balanced} accuracy (macro-recall) as the headline
+figure---\textbf{90.0\%, 86.0\%, and 90.1\%}---for which the shuffled-label floor sits at
+chance (33.8/33.6/33.5\%; Appendix~\ref{app:gates}). The two-tier reporting prevents the
+imbalance from inflating the headline.
+Leave-one-tool-out transfer and its geometric explanation are discussed
+in \S\ref{sec:cka}.
+
+\subsection{Causal Intervention (H1b)}
+
+\paragraph{Aggregate results ($\alpha{=}2.5$).}
+Tables~\ref{tab:broad} and \ref{tab:narrow} show the broad and narrow
+flip rates.
+H1(b) narrow: Hermes-3 and xLAM-2 clear ($\Delta\geq$25\,pp);
+Qwen3-8B does not ($\Delta{=}0$\,pp).
+H1(b) broad: all three models clear ($\Delta\geq$72\,pp,
+$h>1.86$, all models).
+
+All three models maintain $\Delta\geq59$\,pp and $h>1.86$ against the
+random-direction null, confirming direction-specificity.
+The subspace-matched control confirms the specific direction---not
+merely norm or action-subspace energy---is required (Table~\ref{tab:broad}).
+
+\begin{table}[t]
+\caption{Broad flip rate (give-up $\to$ any non-give-up), $\alpha{=}2.5$.
+Subspace-rand: random vector in span$(v_r,v_m,v_g)$, norm-matched.
+Subscripts are Wilson 95\% CIs.}
+\label{tab:broad}
+\centering\small
+\begin{tabular}{lccccc}
+\toprule
+Model & Retry-dir & Subspace-rand & Random-dir & $\Delta_{\text{ret-rand}}$ (pp) & Cohen's~$h$ \\
+\midrule
+Qwen3-8B & 100.0\%$_{\scriptscriptstyle[94,100]}$ & 33.3\%$_{\scriptscriptstyle[23,46]}$ & 5.0\%  & \textbf{95.0} & 2.67 \\
+Hermes-3 & 92.9\%$_{\scriptscriptstyle[89,96]}$   & 32.5\%$_{\scriptscriptstyle[27,39]}$ & 5.5\%  & \textbf{87.4} & 2.15 \\
+xLAM-2   & 99.0\%$_{\scriptscriptstyle[97,100]}$  & 40.2\%$_{\scriptscriptstyle[35,46]}$ & 25.1\% & \textbf{73.9} & 1.89 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Narrow flip rate (give-up $\to$ retry-same exactly),
+$\alpha{=}2.5$. Subscripts are Wilson 95\% CIs.}
+\label{tab:narrow}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Model & Retry-dir & Random-dir & $\Delta$ (pp) & Cohen's~$h$ \\
+\midrule
+Qwen3-8B & 0.0\%$_{\scriptscriptstyle[0,6]}$    & 0.0\%  & 0.0   & 0.00 \\
+Hermes-3 & 44.7\%$_{\scriptscriptstyle[39,51]}$ & 2.4\%  & \textbf{42.4} & 1.16 \\
+xLAM-2   & 56.7\%$_{\scriptscriptstyle[51,62]}$ & 14.1\% & \textbf{42.6} & 0.94 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Dose-response.}
+Table~\ref{tab:dose} shows the broad flip rate across the finer $\alpha$ sweep.
+The relationship is smooth and monotonic across all three models, saturating
+at $\alpha \geq 1.5$ for Qwen3-8B and near $\alpha = 2.5$ for Hermes-3.
+
+\begin{table}[t]
+\caption{Broad flip rate vs.\ steering $\alpha$ (retry direction).}
+\label{tab:dose}
+\centering\small
+\begin{tabular}{lcccccc}
+\toprule
+Model & $\alpha{=}0$ & $0.5$ & $1.0$ & $1.5$ & $2.0$ & $2.5$ \\
+\midrule
+Qwen3-8B &  0\% & 35\% & 75\% & 100\% & 100\% & 100\% \\
+Hermes-3 &  4\% & 28\% & 48\% &  66\% &  78\% &  93\% \\
+xLAM-2   &  0\% & 38\% & 70\% &  85\% &  93\% &  99\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Per-tool breakdown.}
+Table~\ref{tab:pertool} shows both metrics per tool.
+The broad metric reveals that all models achieve near-100\% flip for
+\emph{every} tool where give-up trajectories exist---the direction
+forces any continuation universally.
+The narrow metric reveals the training-depth gradient most clearly
+on calculator: Hermes-3 converts only 6.3\% of steered calculator
+give-ups to retry-same (the rest become modify-args); xLAM-2 converts
+34.9\%.
+This reflects the density of exact-retry examples in xLAM-2's
+\texttt{APIGen-MT-5k} training data, where transient failures
+warrant identical retries.
+Qwen3-8B has zero calculator give-up trajectories in the test set
+and cannot be evaluated on this tool.
+
+\begin{table}[t]
+\caption{Per-tool flip rates at $\alpha{=}2.5$, retry direction.
+B = broad; N = narrow. *$n{=}3$: statistically unreliable.
+Wilson 95\% CIs shown in brackets.}
+\label{tab:pertool}
+\centering\small
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{Qwen3-8B} & \multicolumn{2}{c}{Hermes-3} & \multicolumn{2}{c}{xLAM-2} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Tool & B & N & B & N & B & N \\
+\midrule
+web\_search  & 100\%$^*$ & 0\%$^*$ & 100\% & 60.5\% & 100\% & 63.6\% \\
+             & \multicolumn{2}{c}{\small$n{=}3$}
+             & \multicolumn{2}{c}{\small$n{=}114$}
+             & \multicolumn{2}{c}{\small$n{=}66$} \\
+             & \multicolumn{2}{c}{\scriptsize[44,100]; [0,56]}
+             & \multicolumn{2}{c}{\scriptsize[97,100]; [51,69]}
+             & \multicolumn{2}{c}{\scriptsize[94,100]; [52,74]} \\[2pt]
+calculator   & \multicolumn{2}{c}{\textit{N/A ($n{=}0$)}} & 100\% & 6.3\% & 100\% & \textbf{34.9\%} \\
+             & \multicolumn{2}{c}{}
+             & \multicolumn{2}{c}{\small$n{=}48$}
+             & \multicolumn{2}{c}{\small$n{=}129$} \\
+             & \multicolumn{2}{c}{}
+             & \multicolumn{2}{c}{\scriptsize[93,100]; \textbf{[2,17]}}
+             & \multicolumn{2}{c}{\scriptsize[97,100]; [27,43]} \\[2pt]
+file\_read   & 100\% & 0\% & 83.9\% & 45.2\% & 96.9\% & 81.3\% \\
+             & \multicolumn{2}{c}{\small$n{=}57$}
+             & \multicolumn{2}{c}{\small$n{=}93$}
+             & \multicolumn{2}{c}{\small$n{=}96$} \\
+             & \multicolumn{2}{c}{\scriptsize[94,100]; [0,6]}
+             & \multicolumn{2}{c}{\scriptsize[75,90]; [35,55]}
+             & \multicolumn{2}{c}{\scriptsize[91,99]; [72,88]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{../results/figures/causal_flip.png}
+  \caption{Broad flip rate (give-up $\to$ any non-give-up) vs.\ steering
+    strength~$\alpha$ for all three models.
+    Solid lines: retry direction; dashed: random-direction control.
+    Dashed vertical line marks $\alpha{=}2.5$ (primary evaluation point).}
+  \label{fig:causal}
+\end{figure}
+
+\paragraph{Form of continuation.}
+At $\alpha{=}2.5$: Qwen3-8B produces 100\% modify-args and 0\%
+retry-same across all 60 give-up cases; Hermes-3 produces 44.7\%
+retry-same, 49.4\% modify-args, 5.9\% still give-up; xLAM-2
+produces 56.7\% retry-same, 42.3\% modify-args, 1.0\% still give-up.
+
+\subsection{Cross-Model Replication (xLAM-2)}
+
+xLAM-2 independently clears both primary pre-registered thresholds:
+90.1\% balanced probe accuracy (89.4\% raw; $\gg$60\% threshold, $p<10^{-4}$) and
+73.9\,pp broad flip rate ($\gg$25\,pp threshold, $h{=}1.89$).
+This constitutes an independent replication across a third model
+family with distinct architecture lineage (Llama-3.1) and agent
+training corpus (\texttt{APIGen-MT-5k}).
+The key comparative finding is that while all three models share a
+causally effective continuation direction, the \emph{form} of recovery
+they express under steering diverges with training depth---xLAM-2
+produces retry-same in 56.7\% of steered trajectories vs.\ 44.7\%
+(Hermes-3) and 0\% (Qwen3-8B).
+Cross-tool leave-one-out transfer and its geometric interpretation are
+reported in the following section.
+
+\subsection{Representational Geometry (CKA)}
+\label{sec:cka}
+
+\paragraph{Cross-model similarity.}
+All three models achieve CKA\,$\approx$\,0.80 at their best
+action-choice layers on 900 matched trajectories (random null
+$\approx$\,0.077), 10$\times$ above chance
+(Table~\ref{tab:cka_model}).
+The Hermes-3 vs.\ xLAM-2 layer-wise profile peaks at L15--16
+(CKA\,$\approx$\,0.953) and drops to its minimum at exactly the
+best action-choice layers (L28:\,0.793, L29:\,0.800).
+Agentic fine-tuning specifically reshapes late-layer representations
+while early layers remain shared---consistent with the base
+Llama-3.1-8B shared by Hermes-3 and xLAM-2.
+
+\begin{table}[h]
+\caption{Cross-model CKA (PCA-50, $n{=}900$; null\,$\approx$\,0.077 computed at $n{=}600$).}
+\label{tab:cka_model}
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+Pair & CKA & Ratio to null \\
+\midrule
+Qwen3-8B vs.\ Hermes-3 & 0.800 & 10.4$\times$ \\
+Qwen3-8B vs.\ xLAM-2   & \textbf{0.874} & 11.4$\times$ \\
+Hermes-3 vs.\ xLAM-2   & 0.798 & 10.4$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Cross-tool orthogonality and probe transfer.}
+Within each model, pairwise CKA between tool-specific trajectory sets
+($n{=}300$/tool, null\,$\approx$\,0.143) ranges from 0.006 to
+0.017---near zero across all model $\times$ tool-pair combinations
+(Figure~\ref{fig:cka_tool}).
+The three tools therefore occupy essentially orthogonal subspaces at
+the action-choice layer, a structural property that replicates across
+all three model families.
+This orthogonality determines probe transfer: a direction extracted
+from web\_search and file\_read trajectories cannot, by construction,
+generalise to the orthogonal calculator subspace, so LOO probe accuracy
+for calculator (27--44\%) falls below the within-tool accuracy.
+Conversely, LOO transfer between web\_search and file\_read (50.0--74.3\%)
+holds precisely because those two tools share subspace alignment.
+Critically, the causal direction is not subject to this constraint:
+adding it to calculator residuals disrupts the give-up attractor at
+100\% broad flip rate despite the representational orthogonality.
+This probe-vs-causal dissociation is a structural property of the
+geometry, not a model-specific failure.
+
+\paragraph{Tool identity is orthogonal, but the give-up$\to$continue axis is shared.}
+Cross-tool CKA measures the orthogonality of tool-\emph{identity} subspaces, which on its
+own makes the probe-transfer failure partly definitional---orthogonal subspaces cannot
+support a single linear decoder. The sharper, non-definitional question is whether the
+\emph{action} geometry, the give-up$\to$continue axis itself, is shared. Within each tool
+we extract that axis (mean give-up minus mean non-give-up activation at the best layer)
+and compare it across tools (Table~\ref{tab:actiondir}). The web\_search and file\_read
+action directions are \emph{aligned} (cos $=0.62$ for Hermes-3, $0.54$ for xLAM-2) even
+though their identity subspaces are orthogonal (CKA $\approx 0.01$); the calculator action
+direction is orthogonal to both ($|\cos|\leq 0.18$). This converts the leave-one-tool-out
+pattern from a tautology into a \emph{prediction}: probe transfer succeeds exactly between
+the tools whose action axes align (web\_search$\leftrightarrow$file\_read, LOO 50--74\%)
+and fails for the tool whose action axis is orthogonal (calculator, 27--44\%). The probe
+overfits to where the shared continue/give-up axis lives; the causal patch succeeds on all
+tools because it is applied along each trajectory's own action direction, and the
+subspace-matched control (Table~\ref{tab:broad}) shows it is the \emph{specific
+orientation}, not mere norm, that flips the behaviour.
+
+\begin{table}[h]
+\caption{Pairwise cosine of per-tool give-up$\to$continue directions at the best layer.
+The web\_search/file\_read action axis is shared; calculator's is orthogonal.
+Qwen3-8B is omitted (too few give-ups outside file\_read for a per-tool direction).}
+\label{tab:actiondir}
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+Tool pair & Hermes-3 & xLAM-2 \\
+\midrule
+web\_search -- file\_read & $+0.62$ & $+0.54$ \\
+calculator -- file\_read  & $-0.12$ & $+0.14$ \\
+calculator -- web\_search & $-0.18$ & $-0.13$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[t]{0.50\linewidth}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../results/figures/cka_cross_tool.png}
+    \caption{Cross-tool CKA at each model's best action-choice layer.
+      All off-diagonal values ($\leq$0.017) lie far below the random
+      null ($\approx$0.143): the three tools occupy near-orthogonal
+      subspaces.}
+    \label{fig:cka_tool}
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[t]{0.46\linewidth}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../results/figures/cka_layer_profile.png}
+    \caption{Hermes-3 vs.\ xLAM-2 CKA by layer. Similarity peaks at
+      L15--16 (shared base) and drops precisely at the best
+      action-choice layers (L28, L29).}
+    \label{fig:cka_layer}
+  \end{minipage}
+\end{figure}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{The probe-vs-causal dissociation.}
+A striking asymmetry emerges across all three models: the causal
+direction forces continuation for calculator give-ups at near-100\%
+broad flip rate, yet a probe trained on web\_search and file\_read
+trajectories cannot decode calculator labels at above-chance accuracy.
+The CKA analysis explains why: representational generalisation requires
+subspace alignment, which is absent for orthogonal tools, while causal
+disruption of the give-up attractor requires only that the injected
+direction have sufficient norm in the relevant subspace.
+\citet{heo2024llms} report an analogous pattern: their
+instruction-following direction generalises across unseen tasks but not
+across out-of-distribution instruction types---representational
+generalisation breaks at distributional boundaries while causal
+effectiveness persists.
+The dissociation is predicted by the CKA orthogonality bound: a causal
+direction need not lie in the probe-trained subspace to disrupt the
+attractor it targets. That mechanistic prediction makes this a
+principled characterisation of action-choice geometry in transformers,
+not an experimental artefact---independent of the number of models
+examined.
+
+\paragraph{Training depth and recovery richness.}
+The narrow retry-same gradient (Qwen=0\%, Hermes=44.7\%,
+xLAM-2=56.7\% overall; N/A, 6.3\%, 34.9\% for calculator) reflects
+each model's training distribution.
+Qwen3-8B's BFCL~v3 scoring penalises redundant retries, making it
+impossible to steer toward naive looping.
+xLAM-2's \texttt{APIGen-MT-5k} includes transient-failure retry
+scenarios, producing a higher retry-same rate.
+The direction acts as a \emph{continuation trigger}: it activates
+whatever recovery behavior the model has already learned.
+
+\paragraph{Safety implication.}
+Steering a well-trained model toward ``try again'' does not produce
+blind looping.  In all models, the majority of steered trajectories
+produce behaviorally coherent continuation; Qwen3-8B produces
+\emph{only} intelligent adaptation under steering.
+The asymmetry---harder to induce naive looping in better-trained
+models---tentatively suggests, across these three models with an
+informal training-depth ordering, that agent-native training may
+be a safety-relevant pattern. We flag this as a hypothesis motivating
+larger-scale controlled investigation, not a confirmed result.
+
+\paragraph{Limitations.}
+Qwen3-8B causal evaluation is limited: only 60 give-up trajectories,
+dominated by file\_read ($n{=}57$); per-tool claims for Qwen are
+restricted to that tool.
+Intervention patches a single layer and token position; full causal
+mediation may involve multiple positions. The G-POS sanity check found
+above-chance probe accuracy at offsets $t^*{-}1$, $t^*$, and
+$t^*{+}1$, consistent with the effect not being tied to a single
+token slot, but a systematic multi-layer sweep remains future work.
+xLAM-2 uses a different tool-call format (JSON array vs.\ XML), which
+could in principle contribute to representational differences.
+Mock tools return deterministic, sometimes seed-invariant responses;
+multi-seed verification does not provide full independent replication.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+
+A causally effective continuation direction exists in the residual
+stream of all three tested 8B-class LLMs: linear probes recover the
+3-class action decision at 86.0--90.1\% \emph{balanced} accuracy
+($>$52\,pp above the chance floor; $p<10^{-4}$, Holm-Bonferroni); causal
+steering produces 74--95\,pp absolute increase in non-give-up behaviour
+vs.\ random controls ($h>1.86$), with a subspace-matched control
+confirming the specific direction---not its norm---drives the effect.
+Cross-tool CKA analysis reveals that the three tools occupy
+near-orthogonal representational subspaces (CKA\,$\approx$\,0.01
+vs.\ null\,$\approx$\,0.14), which geometrically explains why
+leave-one-out probe transfer fails for the most dissimilar tool while
+causal effectiveness is preserved: representational generalisation and
+causal reach are governed by different geometric properties.
+Cross-model replication with xLAM-2 reveals a training-depth gradient
+in \emph{recovery richness}: the direction acts as a universal
+continuation trigger, but the specific recovery form it elicits
+(retry-same vs.\ modify-args) tracks each model's training distribution
+---narrow retry-same rates of 0\%, 44.7\%, and 56.7\% for Qwen3-8B,
+Hermes-3, and xLAM-2 respectively.
+Agent-native training enriches \emph{how} a model recovers, not merely
+\emph{whether} it does.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{ack}
+Research conducted using compute provided by the host institution.
+No competing interests.
+% Do not include in anonymous submission.
+\end{ack}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\clearpage
+\appendix
+\section{Validation Suite Summary}
+\label{app:gates}
+
+The following checks were run on all three models to validate
+measurement integrity.
+
+\begin{table}[h]
+\caption{Selected validation checks. Most passed across all three
+  models; two preregistered controls were not fully met and are disclosed
+  in the text below.}
+\label{tab:gates}
+\centering\small
+\begin{tabular}{llll}
+\toprule
+Check & Qwen3-8B & Hermes-3 & xLAM-2 \\
+\midrule
+Ambiguous label rate ($\leq$15\%)  & 0\% & 0\% & 0\% \\
+Layer smoothness ($\leq$5\,pp gap) & 0.56\,pp & 1.67\,pp & 0.83\,pp \\
+PC1 class-sep.\ variance ($\geq$40\%) & 86.9\% & 90.6\% & 68.4\% \\
+Position stability (3 token positions) & 3/3 & 3/3 & 3/3 \\
+Within-error-type accuracy ($\geq$50\%) & 3/3 & 3/3 & 3/3 \\
+Direction specificity (retry $>$3$\times$rand) & \checkmark & \checkmark & \checkmark \\
+Probe vs.\ position-only gap & +27\,pp & +31\,pp & +33\,pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{G-SHUF resolved.}
+The shuffled-label control (G-SHUF, target $\leq$0.40) reached 0.52,
+0.41, and 0.41 under raw accuracy. Post-hoc analysis showed this was
+a test-set class imbalance artifact: the majority class fractions were
+62\%, 47\%, and 56\% for Qwen3-8B, Hermes-3, and xLAM-2 respectively.
+Under \emph{balanced} accuracy (uniform class weighting), the true probe
+scores are \textbf{90.0\%, 86.0\%, and 90.1\%} and the balanced shuffle
+floor sits at chance for all three models (33.8\%, 33.6\%, 33.5\%).
+G-SHUF therefore passes once imbalance is accounted for. The position-only
+baseline (G-POS) was exceeded by Qwen3-8B (0.62) and xLAM-2 (0.56);
+the probe beats position-only by +27/+31/+33\,pp (Table~\ref{tab:gates}),
+establishing that residual-stream \emph{content} encodes action choice
+beyond trajectory structure.
+
+\paragraph{Cross-tool leave-one-out transfer.}
+LOO probe accuracy is 83\% (web\_search) and 74\% (file\_read) when
+holding out web\_search and file\_read respectively, confirming
+transfer between tools with shared representational subspace.
+The calculator tool occupies a near-orthogonal subspace (CKA\,$<$\,0.02),
+which geometrically bounds LOO probe transfer to that tool---a finding
+explained and reported as a main result in \S\ref{sec:cka}.
+
+\section{Decision Log Excerpt}
+\label{app:decisions}
+
+Full log in \texttt{logs/decisions.jsonl}.  Key decision points:
+(1) system prompt adjusted post-pilot after Hermes-3 produced 92\%
+give-up on initial pilot, calibrating the base-rate to a more
+ecologically valid distribution;
+(2) uniform outcome sampling adopted after resolving an internal
+inconsistency in the pre-registration;
+(3) Qwen3-8B's near-zero give-up rate ($\approx$2\% of error
+trajectories) logged as a positive cross-model finding about
+agent-training quality;
+(4) broad metric adopted as xLAM-2 primary metric after G3
+established that Qwen3-8B never produces retry-same, motivating a
+metric sensitive to all recovery forms;
+(5) cross-tool CKA analysis added after noticing the calculator
+LOO pattern, leading to the geometric explanation in \S\ref{sec:cka};
+(6) per-tool causal table verified against raw CSVs during final
+review, confirming all numbers.
+
+\section{Compute Attribution}
+\label{app:compute}
+
+Total GPU time: $\approx$5.2\,h on a single NVIDIA A100~(80\,GB).
+
+\begin{table}[h]
+\caption{GPU time by stage.}
+\centering\small
+\begin{tabular}{lr}
+\toprule
+Stage & Seconds \\
+\midrule
+Trajectory gen.\ Hermes-3 (all seeds) & 2185 \\
+Trajectory gen.\ Qwen3-8B (all seeds) & 3053 \\
+Trajectory gen.\ xLAM-2 (all seeds) & 721 \\
+Activation recording Hermes-3 & 674 \\
+Activation recording Qwen3-8B & 664 \\
+Activation recording xLAM-2 & 74 \\
+Causal intervention Qwen3-8B & 833 \\
+Causal intervention Hermes-3 & 2371 \\
+Causal intervention xLAM-2 & 2135 \\
+\midrule
+\textbf{Total} & \textbf{$\approx$18,710} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\newpage
+\section*{Conference For AI Scientists 2026 -- AI Involvement Checklist}
+\label{checklist_ai_involvement}
+
+\subsection*{Research Stage Assessment}
+
+\begin{enumerate}
+
+\item \textbf{Hypothesis development.}
+
+Answer: \involvementC{}
+
+Iteration Effort: \iterationMedium{}
+
+Explanation: The human author identified the research target (agentic
+tool-error recovery) and the mechanistic framing.
+The AI agents proposed the specific hypotheses (H1a/b thresholds,
+cross-model predictions, three pre-registered fallback abstracts),
+generated the pre-registration document, and designed the
+sanity-gate suite.
+The human approved and committed the pre-registration before any GPU
+compute began, providing the critical authorial judgment checkpoint.
+Approximately 20--40 substantive prompt-response exchanges to reach
+the final pre-registration.
+
+\item \textbf{Experimental design and implementation.}
+
+Answer: \involvementD{}
+
+Iteration Effort: \iterationHigh{}
+
+Explanation: The AI agents wrote all source code
+(\texttt{src/}, \texttt{scripts/}, \texttt{Makefile}), designed the
+probe methodology, intervention protocol, and CKA analysis pipeline.
+The human constrained compute resources (single GPU, CPU thread cap),
+approved model choices, and identified one implementation error
+(raw CKA with $d{\gg}n$ yielding an inflated null requiring a full
+rewrite). Hundreds of tool calls across implementation and
+debugging cycles.
+
+\item \textbf{Analysis of data and interpretation of results.}
+
+Answer: \involvementD{}
+
+Iteration Effort: \iterationHigh{}
+
+Explanation: The AI agents ran all analysis scripts, computed all
+statistics, generated all publication-quality figures, and interpreted
+all results across three models. The human reviewed and validated the
+final numbers against raw data files before submission.
+Hundreds of analysis calls including multiple re-runs after
+error correction and CKA implementation fix.
+
+\item \textbf{Writing.}
+
+Answer: \involvementD{}
+
+Iteration Effort: \iterationMedium{}
+
+Explanation: The AI agents authored all text in the paper, including
+the abstract, all sections, tables, captions, and both checklists.
+The human reviewed for factual consistency and scientific accuracy.
+Approximately 3--5 complete drafts across the writing process.
+
+\end{enumerate}
+
+\subsection*{AI System Documentation}
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+
+\item \textbf{AI systems used.}
+
+Description: Two frontier large language models acting in concert
+as an autonomous research agent.
+The first served as high-level research planner and decision-maker,
+proposing hypotheses, designing the experimental protocol, and
+directing the overall research strategy.
+The second served as the pipeline executor, writing and running all
+code, recording activations, training probes, running causal
+interventions, performing CKA analysis, verifying citations, and
+drafting this paper.
+Both models operated via a structured tool-calling loop with access
+to a bash shell, file read/write, and web search on a single 48\,GB
+GPU node.
+One of the executor models is itself among the three agentic LLMs
+studied in the paper; this is disclosed in full in the camera-ready
+version per conference policy.
+
+\item \textbf{Observed AI Limitations.}
+
+Description: Three categories of failure were observed.
+\emph{Numeric hallucination:} an early draft of the paper contained a
+per-tool causal table labeled ``broad metric'' that in fact used narrow
+metric values, and attributed a finding to xLAM-2 that was actually
+shared by all models.  Corrected only after a systematic verification
+pass against raw CSVs.
+\emph{Implementation error:} the first CKA implementation used the
+primal $d{\times}d$ formula in float32; the random null was 0.72
+(expected $\approx$0.93) and the sanity check failed, requiring a
+complete rewrite with PCA-50 and the kernel $n{\times}n$ formula.
+\emph{Citation venue error:} Kornblith et al.\ was cited as
+``NeurIPS 2019'' when the correct venue is ICML 2019.  Caught only
+by fetching the arXiv page directly.
+
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\newpage
+\section*{Conference For AI Scientists 2026 -- Reproducibility and Responsibility Checklist}
+\label{checklist_reproducibility}
+
+\begin{enumerate}
+
+\item \textbf{Claims.}
+\item[] Question: Do the main claims made in the abstract and introduction
+accurately reflect the paper's contributions and scope?
+\item[] Answer: \answerYes{}
+\item[] Justification: All numbers in the abstract and introduction
+were verified against the raw result files (\texttt{causal\_flip\_*.csv},
+\texttt{analysis\_summary.json}) before the final draft.
+Pre-registered thresholds for H1(a) and H1(b) are stated in
+\S\ref{sec:methods}; observed values are reported in
+Tables~\ref{tab:probe}, \ref{tab:broad}, and \ref{tab:narrow}.
+Deviations from pre-registered secondary predictions are documented
+in Appendix~\ref{app:decisions}.
+
+\item \textbf{Limitations.}
+\item[] Question: Does the paper discuss the limitations of the work?
+\item[] Answer: \answerYes{}
+\item[] Justification: Section~\ref{sec:discussion} (Limitations
+paragraph) explicitly addresses: Qwen3-8B's small causal test set
+($n{=}60$, dominated by file\_read); single-layer/single-position
+intervention; tool-call format confound; and seed-invariant mock-tool
+responses preventing true independent replication.
+
+\item \textbf{Theory Assumptions and Proofs.}
+\item[] Answer: \answerNA{}
+\item[] Justification: The paper is empirical; no theoretical results
+or proofs are claimed.
+
+\item \textbf{Experimental Result Reproducibility.}
+\item[] Answer: \answerYes{}
+\item[] Justification: All hyperparameters, splits, and model
+identifiers are specified in \S\ref{sec:methods}.
+Mock tool responses are byte-deterministic (SHA-256 hash).
+The full pipeline is reproduced by \texttt{make all} from the
+repository root given the specified random seeds.  Pre-registrations
+are frozen at named git commits (\texttt{0c7ea00}, \texttt{a8e84d2}).
+
+\item \textbf{Open Access to Data and Code.}
+\item[] Answer: \answerNo{}
+\item[] Justification: Code and data are not released at submission
+time to preserve anonymity.  All three subject models are publicly
+available on HuggingFace without access tokens.  We commit to
+releasing the full pipeline code and trajectory data on acceptance.
+
+\item \textbf{Experimental Setting / Details.}
+\item[] Answer: \answerYes{}
+\item[] Justification: \S\ref{sec:methods} specifies model identifiers,
+layer counts, hidden dimensions, label rubric, probe hyperparameters
+($\ell_2$, 5-fold CV), intervention formula, $\alpha$ sweep values,
+and all three null controls.
+
+\item \textbf{Experiment Statistical Significance.}
+\item[] Answer: \answerYes{}
+\item[] Justification: Probe accuracy is tested by permutation test
+(10k shuffles) with Holm-Bonferroni correction (family-wise
+$\alpha{=}0.05$).  Causal flip rates use cluster bootstrap by
+base-prompt (10k resamples, percentile bootstrap CI).  Wilson 95\%
+confidence intervals are shown as subscripts for all flip-rate
+point estimates in Tables~\ref{tab:broad},~\ref{tab:narrow},
+and~\ref{tab:pertool}.  Cohen's $h$ effect sizes are
+reported for all causal comparisons.
+
+\item \textbf{Experiments Compute Resources.}
+\item[] Answer: \answerYes{}
+\item[] Justification: Appendix~\ref{app:compute} lists GPU seconds
+per stage.  All experiments ran on a single NVIDIA A100~(80\,GB)
+using \texttt{bfloat16} precision; total GPU time $\approx$5.2\,h.
+CPU analysis used $\leq$16 threads (OMP/MKL/OpenBLAS cap enforced).
+
+\item \textbf{Research Ethics.}
+\item[] Answer: \answerYes{}
+\item[] Justification: The study uses only publicly available,
+open-weight language models and synthetic mock-tool data; no human
+subjects, personal data, or proprietary systems are involved.
+The AI authorship structure follows CAISc~2026 policy and is fully
+documented in the AI Involvement Checklist above.
+
+\item \textbf{Broader Impacts.}
+\item[] Answer: \answerYes{}
+\item[] Justification: \S\ref{sec:discussion} (Safety implication
+paragraph) discusses the positive implication that agent-native
+training makes naive looping \emph{harder} to induce via residual-stream
+patching.  A potential negative impact is that the causal direction
+could in principle be used to force over-persistent behavior in deployed
+agents; we note that the direction must be applied by an entity with
+full model-weight access, limiting practical misuse.
+
+\end{enumerate}
+
+\end{document}

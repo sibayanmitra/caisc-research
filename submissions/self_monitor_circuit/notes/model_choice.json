@@ -1,0 +1,13 @@
+{
+  "model_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+  "tl_arch": "Qwen/Qwen2.5-7B",
+  "load_path": "hf_then_tl",
+  "note": "HF weights loaded via AutoModelForCausalLM fp16 on CPU, wrapped with TL using Qwen2.5-7B config (same arch: 28L, 3584d, 28H, 128d_head)",
+  "n_layers": 28,
+  "d_model": 3584,
+  "n_heads": 28,
+  "d_head": 128,
+  "n_ctx": 2048,
+  "dtype": "torch.float16",
+  "timestamp": "2026-05-28 00:10:00"
+}

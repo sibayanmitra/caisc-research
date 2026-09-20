@@ -1,0 +1,227 @@
+[02:15:02] ==========================================
+[02:15:02] ==========================================
+[02:15:02] Paper 2 overnight pipeline starting
+[02:15:02] Paper 2 overnight pipeline starting
+[02:15:02] GPU: 1
+[02:15:02] GPU: 1
+[02:15:02] ==========================================
+[02:15:02] ==========================================
+[02:15:02] Phase 1: Build pairs...
+[02:15:02] Phase 1: Build pairs...
+[02:15:02] === Paper 2 Phase 1: Build pairs (multi-morphology design) ===
+[02:15:02]   antonym: 8 pairs
+[02:15:02]   contraction: 5 pairs
+[02:15:02]   fails_to: 3 pairs
+[02:15:02]   false_that: 5 pairs
+[02:15:02]   never: 5 pairs
+[02:15:02]   not: 10 pairs
+[02:15:02]   quantifier_no: 5 pairs
+[02:15:02]   ✓ SC1: antonym has 8 pairs
+[02:15:02]   ✓ SC1: contraction has 5 pairs
+[02:15:02]   ✓ SC1: fails_to has 3 pairs
+[02:15:02]   ✓ SC1: false_that has 5 pairs
+[02:15:02]   ✓ SC1: never has 5 pairs
+[02:15:02]   ✓ SC1: not has 10 pairs
+[02:15:02]   ✓ SC1: quantifier_no has 5 pairs
+[02:15:02]   not_nonneg (CONFOUND CONTROL): 15 pairs
+[02:15:02] 
+Length asymmetry by morphology (mean pos_len - neg_len in chars):
+[02:15:02]   antonym: mean diff = +0.2 chars (negative longer if negative)
+[02:15:02]   contraction: mean diff = -4.0 chars (negative longer if negative)
+[02:15:02]   fails_to: mean diff = -7.7 chars (negative longer if negative)
+[02:15:02]   false_that: mean diff = -17.0 chars (negative longer if negative)
+[02:15:02]   never: mean diff = -6.0 chars (negative longer if negative)
+[02:15:02]   not: mean diff = -4.8 chars (negative longer if negative)
+[02:15:02]   quantifier_no: mean diff = +1.8 chars (negative longer if negative)
+[02:15:02] 
+✓ Phase 1 complete. Train morphs: ['not', 'contraction', 'never', 'quantifier_no', 'false_that', 'fails_to']
+[02:15:02]   Held-out test morph (NO 'not' token): ['antonym']
+[02:15:02]   Confound control: not_nonneg (15 pairs)
+[02:15:02] ✓ Phase 1 done
+[02:15:02] ✓ Phase 1 done
+[02:15:02] Phase 2: Extract activations (GPU 1)...
+[02:15:02] Phase 2: Extract activations (GPU 1)...
+[02:15:03] === Paper 2 Phase 2: Extract activations (per morphology + control) ===
+[02:15:03] Total pairs across all morphologies: 56
+[02:15:03] Loading model on GPU 1...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   5%|▍         | 16/339 [00:00<00:02, 152.71it/s]Loading weights:   9%|▉         | 32/339 [00:00<00:02, 144.98it/s]Loading weights:  14%|█▍        | 47/339 [00:00<00:02, 142.17it/s]Loading weights:  18%|█▊        | 62/339 [00:00<00:02, 107.21it/s]Loading weights:  22%|██▏       | 74/339 [00:00<00:02, 90.07it/s] Loading weights:  25%|██▍       | 84/339 [00:00<00:02, 89.92it/s]Loading weights:  28%|██▊       | 94/339 [00:00<00:03, 76.01it/s]Loading weights:  30%|███       | 103/339 [00:01<00:03, 76.62it/s]Loading weights:  33%|███▎      | 112/339 [00:01<00:03, 66.62it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:02, 76.02it/s]Loading weights:  40%|████      | 136/339 [00:01<00:02, 85.09it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:02, 74.73it/s]Loading weights:  47%|████▋     | 160/339 [00:01<00:02, 71.26it/s]Loading weights:  51%|█████     | 172/339 [00:02<00:02, 68.20it/s]Loading weights:  54%|█████▍    | 184/339 [00:02<00:02, 76.74it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 84.96it/s]Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 77.39it/s]Loading weights:  65%|██████▍   | 220/339 [00:02<00:01, 72.15it/s]Loading weights:  68%|██████▊   | 232/339 [00:02<00:01, 78.98it/s]Loading weights:  72%|███████▏  | 244/339 [00:03<00:01, 72.79it/s]Loading weights:  76%|███████▌  | 256/339 [00:03<00:01, 82.14it/s]Loading weights:  79%|███████▉  | 268/339 [00:03<00:00, 75.04it/s]Loading weights:  82%|████████▏ | 277/339 [00:05<00:03, 16.57it/s]Loading weights: 100%|██████████| 339/339 [00:05<00:00, 65.57it/s]
+Loaded pretrained model Qwen/Qwen2.5-7B into HookedTransformer
+[02:16:18]   Model loaded in 74.1s
+[02:16:18] Extracting positives...
+[02:16:20]   [20/56] extracted
+[02:16:23]   [40/56] extracted
+[02:16:25] Extracting negatives...
+[02:16:27]   [20/56] extracted
+[02:16:30]   [40/56] extracted
+[02:16:32] SC6 PASS: no NaN/Inf
+[02:16:32] SC7: mean relative distance: 0.6479 (should be > 0.01)
+[02:16:32] ✓ Phase 2 done. Shape: torch.Size([56, 28, 3584])
+[02:16:33] ✓ Phase 2 done
+[02:16:33] ✓ Phase 2 done
+[02:16:33] Phase 3: SVD directions...
+[02:16:33] Phase 3: SVD directions...
+[02:16:34] === Paper 2 Phase 3: SVD directions (train vs held-out morphology) ===
+[02:16:34] Loaded: 56 pairs, 28 layers, d_model=3584
+[02:16:34] Morphologies with ≥2 pairs: ['antonym', 'contraction', 'fails_to', 'false_that', 'never', 'not', 'quantifier_no', 'not_nonneg']
+[02:16:36] Train morphologies: ['not', 'contraction', 'never', 'quantifier_no', 'false_that', 'fails_to'] → 33 pairs
+[02:16:38] Peak layer (train): 5, EV: 0.9864
+[02:16:38] 
+  TRANSFER TEST: cos(d_train, d_antonym)
+[02:16:38]     peak-layer cosine: +0.9976
+[02:16:38]     max cosine across layers: +0.9987 at L=12
+[02:16:38]     PASS ✓ logical-negation hypothesis supported
+[02:16:38] 
+  CONFOUND TEST: cos(d_train, d_not_nonneg) at peak L: -0.9991
+[02:16:38]     WARN - d_neg may track lexical 'not'
+[02:16:38] 
+Cross-morphology cosines at peak layer (training morphs only):
+[02:16:38]                     not  contra   never  quanti  false_  fails_
+[02:16:38]   not             +1.000  +0.997  +0.997  -0.988  +0.989  +0.998
+[02:16:38]   contraction     +0.997  +1.000  +0.994  -0.989  +0.990  +0.997
+[02:16:38]   never           +0.997  +0.994  +1.000  -0.982  +0.984  +0.995
+[02:16:38]   quantifier_no   -0.988  -0.989  -0.982  +1.000  -0.998  -0.987
+[02:16:38]   false_that      +0.989  +0.990  +0.984  -0.998  +1.000  +0.988
+[02:16:38]   fails_to        +0.998  +0.997  +0.995  -0.987  +0.988  +1.000
+[02:16:38] 
+✓ Phase 3 done. Peak layer: 5. Transfer-to-antonym is the critical test.
+[02:16:38] ✓ Phase 3 done
+[02:16:38] ✓ Phase 3 done
+[02:16:38] Phase 4: Transfer test (GPU 1)...
+[02:16:38] Phase 4: Transfer test (GPU 1)...
+[02:16:40] === Paper 2 Phase 4: Transfer test ===
+[02:16:40] Peak layer: 5, alpha_unit (mean norm): 552.16
+[02:16:40] Loading model on GPU 1...
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<02:15,  2.49it/s]Loading weights:   1%|          | 2/339 [00:00<01:16,  4.41it/s]Loading weights:  11%|█         | 37/339 [00:00<00:03, 97.91it/s]Loading weights:  16%|█▌        | 54/339 [00:00<00:03, 89.22it/s]Loading weights:  20%|█▉        | 67/339 [00:01<00:03, 83.11it/s]Loading weights:  23%|██▎       | 78/339 [00:01<00:02, 87.10it/s]Loading weights:  26%|██▋       | 89/339 [00:01<00:02, 91.45it/s]Loading weights:  30%|██▉       | 101/339 [00:01<00:03, 79.00it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:02, 92.23it/s]Loading weights:  40%|████      | 136/339 [00:01<00:02, 96.91it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:02, 86.36it/s]Loading weights:  47%|████▋     | 160/339 [00:02<00:01, 91.47it/s]Loading weights:  51%|█████     | 172/339 [00:02<00:01, 96.67it/s]Loading weights:  54%|█████▍    | 184/339 [00:02<00:01, 84.95it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 91.17it/s]Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 80.69it/s]Loading weights:  65%|██████▍   | 220/339 [00:02<00:01, 88.57it/s]Loading weights:  69%|██████▊   | 233/339 [00:02<00:01, 97.32it/s]Loading weights:  72%|███████▏  | 244/339 [00:02<00:00, 98.40it/s]Loading weights:  76%|███████▌  | 256/339 [00:03<00:00, 103.96it/s]Loading weights:  79%|███████▉  | 268/339 [00:03<00:00, 87.18it/s] Loading weights:  83%|████████▎ | 280/339 [00:03<00:00, 93.53it/s]Loading weights:  86%|████████▌ | 292/339 [00:03<00:00, 98.61it/s]Loading weights:  90%|████████▉ | 304/339 [00:03<00:00, 103.99it/s]Loading weights:  93%|█████████▎| 316/339 [00:03<00:00, 87.95it/s] Loading weights:  97%|█████████▋| 328/339 [00:03<00:00, 93.71it/s]Loading weights: 100%|██████████| 339/339 [00:03<00:00, 88.80it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loaded pretrained model Qwen/Qwen2.5-7B into HookedTransformer
+Traceback (most recent call last):
+  File "/home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/scripts/04_transfer_test.py", line 137, in <module>
+    sys.exit(main())
+  File "/home/anonymous/CAISc/autovoila/all-spikes/paper2-negation-operator/scripts/04_transfer_test.py", line 68, in main
+    categories_list = meta["pair_category"]
+KeyError: 'pair_category'
+[02:17:30] ✗ Phase 4 FAILED
+[02:17:30] ✗ Phase 4 FAILED
+[02:32:55] ==========================================
+[02:32:55] ==========================================
+[02:32:55] Paper 2 RESUME: Phases 4 → 5 → 8
+[02:32:55] Paper 2 RESUME: Phases 4 → 5 → 8
+[02:32:55] ==========================================
+[02:32:55] ==========================================
+[02:32:55] Phase 4: Transfer test (GPU 1)...
+[02:32:55] Phase 4: Transfer test (GPU 1)...
+[02:32:56] === Paper 2 Phase 4: Transfer test ===
+[02:32:56] Peak layer: 5, alpha_unit (mean norm): 552.16
+[02:32:56] Loading model on GPU 1...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 2/339 [00:00<00:19, 17.72it/s]Loading weights:   5%|▌         | 18/339 [00:00<00:03, 97.18it/s]Loading weights:   9%|▊         | 29/339 [00:00<00:03, 99.61it/s]Loading weights:  12%|█▏        | 40/339 [00:00<00:03, 78.09it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:04, 69.30it/s]Loading weights:  19%|█▉        | 64/339 [00:00<00:03, 81.15it/s]Loading weights:  22%|██▏       | 76/339 [00:00<00:02, 88.27it/s]Loading weights:  26%|██▌       | 88/339 [00:01<00:03, 78.30it/s]Loading weights:  29%|██▉       | 100/339 [00:01<00:03, 73.35it/s]Loading weights:  33%|███▎      | 112/339 [00:01<00:02, 80.49it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:02, 74.05it/s]Loading weights:  40%|████      | 136/339 [00:01<00:02, 81.50it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:02, 75.06it/s]Loading weights:  47%|████▋     | 160/339 [00:02<00:02, 82.82it/s]Loading weights:  51%|█████     | 172/339 [00:02<00:02, 77.10it/s]Loading weights:  54%|█████▍    | 184/339 [00:02<00:01, 81.31it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 76.36it/s]Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 71.31it/s]Loading weights:  65%|██████▍   | 220/339 [00:02<00:01, 78.39it/s]Loading weights:  68%|██████▊   | 232/339 [00:03<00:01, 74.32it/s]Loading weights:  71%|███████   | 240/339 [00:03<00:01, 74.95it/s]Loading weights:  76%|███████▌  | 256/339 [00:03<00:01, 76.04it/s]Loading weights:  79%|███████▉  | 268/339 [00:03<00:00, 82.84it/s]Loading weights:  83%|████████▎ | 280/339 [00:03<00:00, 76.25it/s]Loading weights:  86%|████████▌ | 292/339 [00:03<00:00, 72.26it/s]Loading weights:  90%|████████▉ | 304/339 [00:03<00:00, 78.87it/s]Loading weights:  93%|█████████▎| 316/339 [00:04<00:00, 73.64it/s]Loading weights:  97%|█████████▋| 328/339 [00:04<00:00, 80.55it/s]Loading weights: 100%|██████████| 339/339 [00:04<00:00, 80.25it/s]
+Loaded pretrained model Qwen/Qwen2.5-7B into HookedTransformer
+[02:33:41] Test pairs: 49 across morphologies
+[02:34:00]   α=-2.0×unit: abs_shift=7.4302, signed=-7.3916
+[02:34:11]   α=-1.0×unit: abs_shift=6.7296, signed=-6.6730
+[02:34:21]   α=-0.5×unit: abs_shift=5.4293, signed=-5.2320
+[02:34:32]   α=+0.0×unit: abs_shift=0.0000, signed=+0.0000
+[02:34:43]   α=+0.5×unit: abs_shift=1.9449, signed=+0.1406
+[02:34:54]   α=+1.0×unit: abs_shift=3.4714, signed=-2.3256
+[02:35:05]   α=+2.0×unit: abs_shift=6.3076, signed=-5.8696
+[02:35:49] SC13 (α=0 shift ≈ 0): 0.0000
+[02:35:49] ✓ Phase 4 done. Random baseline: 3.0586±0.5797
+[02:35:50] ✓ Phase 4 done
+[02:35:50] ✓ Phase 4 done
+[02:35:50] Phase 5: Cross-morphology matrix (GPU 1)...
+[02:35:50] Phase 5: Cross-morphology matrix (GPU 1)...
+[02:35:52] === Paper 2 Phase 5: Cross-morphology transfer ===
+[02:35:52] Morphologies: ['antonym', 'contraction', 'fails_to', 'false_that', 'never', 'not', 'quantifier_no', 'not_nonneg'], peak L: 5
+[02:35:52] α_unit: 552.16
+[02:35:52] Loading model on GPU 1...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   4%|▎         | 12/339 [00:00<00:02, 118.53it/s]Loading weights:   7%|▋         | 24/339 [00:00<00:02, 118.38it/s]Loading weights:  11%|█         | 36/339 [00:00<00:02, 113.38it/s]Loading weights:  14%|█▍        | 48/339 [00:00<00:04, 69.08it/s] Loading weights:  17%|█▋        | 59/339 [00:00<00:03, 77.65it/s]Loading weights:  22%|██▏       | 76/339 [00:00<00:03, 79.69it/s]Loading weights:  26%|██▌       | 88/339 [00:01<00:03, 74.88it/s]Loading weights:  29%|██▉       | 100/339 [00:01<00:02, 82.16it/s]Loading weights:  33%|███▎      | 112/339 [00:01<00:03, 75.30it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:02, 83.25it/s]Loading weights:  40%|████      | 136/339 [00:01<00:02, 76.70it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:02, 83.41it/s]Loading weights:  47%|████▋     | 160/339 [00:01<00:02, 75.87it/s]Loading weights:  51%|█████     | 172/339 [00:02<00:02, 83.04it/s]Loading weights:  54%|█████▍    | 184/339 [00:02<00:02, 75.69it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 82.65it/s]Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 76.13it/s]Loading weights:  65%|██████▍   | 220/339 [00:02<00:01, 71.88it/s]Loading weights:  68%|██████▊   | 232/339 [00:02<00:01, 78.40it/s]Loading weights:  72%|███████▏  | 244/339 [00:03<00:01, 72.68it/s]Loading weights:  76%|███████▌  | 256/339 [00:03<00:01, 79.79it/s]Loading weights:  79%|███████▉  | 268/339 [00:03<00:00, 74.60it/s]Loading weights:  83%|████████▎ | 280/339 [00:03<00:00, 70.97it/s]Loading weights:  86%|████████▌ | 292/339 [00:03<00:00, 66.93it/s]Loading weights:  90%|████████▉ | 305/339 [00:03<00:00, 79.06it/s]Loading weights:  93%|█████████▎| 316/339 [00:04<00:00, 82.24it/s]Loading weights:  97%|█████████▋| 328/339 [00:04<00:00, 77.56it/s]Loading weights: 100%|██████████| 339/339 [00:04<00:00, 80.78it/s]
+Loaded pretrained model Qwen/Qwen2.5-7B into HookedTransformer
+[02:36:40]   antonym        → antonym       : shift = 3.5391
+[02:36:41]   antonym        → contraction   : shift = 3.4461
+[02:36:42]   antonym        → fails_to      : shift = 2.6663
+[02:36:43]   antonym        → false_that    : shift = 2.3091
+[02:36:44]   antonym        → never         : shift = 4.1117
+[02:36:46]   antonym        → not           : shift = 4.0533
+[02:36:55]   antonym        → quantifier_no : shift = 4.0511
+[02:37:07]   antonym        → not_nonneg    : shift = 3.7838
+[02:37:15]   contraction    → antonym       : shift = 3.6879
+[02:37:18]   contraction    → contraction   : shift = 3.6732
+[02:37:18]   contraction    → fails_to      : shift = 3.2088
+[02:37:19]   contraction    → false_that    : shift = 2.8244
+[02:37:20]   contraction    → never         : shift = 4.6742
+[02:37:32]   contraction    → not           : shift = 4.0528
+[02:37:34]   contraction    → quantifier_no : shift = 4.3575
+[02:37:37]   contraction    → not_nonneg    : shift = 3.8972
+[02:37:39]   fails_to       → antonym       : shift = 3.4152
+[02:37:40]   fails_to       → contraction   : shift = 2.9894
+[02:37:41]   fails_to       → fails_to      : shift = 2.7632
+[02:37:42]   fails_to       → false_that    : shift = 2.6285
+[02:37:44]   fails_to       → never         : shift = 3.5651
+[02:37:47]   fails_to       → not           : shift = 3.7607
+[02:37:48]   fails_to       → quantifier_no : shift = 3.7258
+[02:37:51]   fails_to       → not_nonneg    : shift = 3.7990
+[02:37:53]   false_that     → antonym       : shift = 3.6265
+[02:37:54]   false_that     → contraction   : shift = 3.5850
+[02:37:54]   false_that     → fails_to      : shift = 3.3668
+[02:37:56]   false_that     → false_that    : shift = 2.3453
+[02:37:57]   false_that     → never         : shift = 5.0132
+[02:37:59]   false_that     → not           : shift = 3.8545
+[02:38:00]   false_that     → quantifier_no : shift = 3.3082
+[02:38:03]   false_that     → not_nonneg    : shift = 4.6104
+[02:38:05]   never          → antonym       : shift = 3.7171
+[02:38:06]   never          → contraction   : shift = 3.3375
+[02:38:07]   never          → fails_to      : shift = 3.1637
+[02:38:08]   never          → false_that    : shift = 2.3502
+[02:38:09]   never          → never         : shift = 4.4613
+[02:38:11]   never          → not           : shift = 4.0177
+[02:38:12]   never          → quantifier_no : shift = 3.7537
+[02:38:16]   never          → not_nonneg    : shift = 4.1473
+[02:38:17]   not            → antonym       : shift = 3.3937
+[02:38:18]   not            → contraction   : shift = 3.4032
+[02:38:19]   not            → fails_to      : shift = 2.5235
+[02:38:20]   not            → false_that    : shift = 2.4295
+[02:38:21]   not            → never         : shift = 4.0607
+[02:38:24]   not            → not           : shift = 3.8666
+[02:38:25]   not            → quantifier_no : shift = 3.5607
+[02:38:28]   not            → not_nonneg    : shift = 3.3915
+[02:38:30]   quantifier_no  → antonym       : shift = 7.4317
+[02:38:31]   quantifier_no  → contraction   : shift = 6.7151
+[02:38:31]   quantifier_no  → fails_to      : shift = 5.4708
+[02:38:33]   quantifier_no  → false_that    : shift = 5.4654
+[02:38:35]   quantifier_no  → never         : shift = 7.2471
+[02:38:38]   quantifier_no  → not           : shift = 7.4974
+[02:38:40]   quantifier_no  → quantifier_no : shift = 7.8993
+[02:38:43]   quantifier_no  → not_nonneg    : shift = 5.0071
+[02:38:45]   not_nonneg     → antonym       : shift = 7.1472
+[02:38:46]   not_nonneg     → contraction   : shift = 5.9089
+[02:38:47]   not_nonneg     → fails_to      : shift = 5.3932
+[02:38:48]   not_nonneg     → false_that    : shift = 5.2873
+[02:38:49]   not_nonneg     → never         : shift = 7.3296
+[02:38:51]   not_nonneg     → not           : shift = 7.4594
+[02:38:52]   not_nonneg     → quantifier_no : shift = 7.4241
+[02:38:56]   not_nonneg     → not_nonneg    : shift = 4.9906
+[02:38:56] 
+Key summary:
+[02:38:56]   TRAIN → TRAIN (within-domain):     4.0256
+[02:38:56]   TRAIN → TEST (antonym):           4.2120  ← Hi = logical signal
+[02:38:56]   TRAIN → not_nonneg (CONFOUND):    4.1421  ← Hi = LEXICAL confound!
+[02:38:56]   ⚠ WARN: confound transfer is high — direction may be lexical
+[02:38:56] ✓ Phase 5 done
+[02:38:56] ✓ Phase 5 done
+[02:38:56] ✓ Phase 5 done
+[02:38:56] Phase 8: Make plots...
+[02:38:56] Phase 8: Make plots...
+[02:38:57]   Saved fig1
+[02:38:58]   Saved fig2
+[02:38:58]   Saved fig3
+[02:38:58] ✓ Phase 8 done
+[02:38:58] ✓ Phase 8 done
+[02:38:58] ✓ Phase 8 done
+[02:38:58] ==========================================
+[02:38:58] ==========================================
+[02:38:58] Paper 2 pipeline COMPLETE
+[02:38:58] Paper 2 pipeline COMPLETE
+[02:38:58] ==========================================
+[02:38:58] ==========================================

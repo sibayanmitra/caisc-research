@@ -1,0 +1,11 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   5%|▍         | 16/338 [00:00<00:02, 147.75it/s]Loading weights:  16%|█▌        | 53/338 [00:00<00:01, 270.55it/s]Loading weights:  26%|██▌       | 87/338 [00:00<00:00, 299.16it/s]Loading weights:  37%|███▋      | 125/338 [00:00<00:00, 326.50it/s]Loading weights:  47%|████▋     | 159/338 [00:00<00:00, 320.12it/s]Loading weights:  58%|█████▊    | 195/338 [00:00<00:00, 320.29it/s]Loading weights:  68%|██████▊   | 231/338 [00:00<00:00, 315.92it/s]Loading weights:  79%|███████▉  | 268/338 [00:00<00:00, 326.01it/s]Loading weights:  90%|████████▉ | 304/338 [00:00<00:00, 335.22it/s]Loading weights: 100%|██████████| 338/338 [00:01<00:00, 320.74it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (887239 > 131072). Running this sequence through the model will result in indexing errors
+en: bits/byte=0.7218  bits/token=3.2604  (n_tok=887238)
+de: bits/byte=0.9705  bits/token=3.1907  (n_tok=1240531)
+fr: bits/byte=0.8691  bits/token=3.1109  (n_tok=1154679)
+tr: bits/byte=1.1873  bits/token=3.7325  (n_tok=1386891)
+zh: bits/byte=1.0217  bits/token=3.8120  (n_tok=2866717)
+hi: bits/byte=0.6633  bits/token=1.8412  (n_tok=3661296)
+wrote /home/anonymous/CAISc/autovoila/all-spikes/tokenizer-zipf/notes/downstream_bpb.csv

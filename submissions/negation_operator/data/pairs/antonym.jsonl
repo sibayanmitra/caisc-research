@@ -1,0 +1,8 @@
+{"morphology": "antonym", "concept_id": "bright_ant", "positive_text": "The room is bright.", "negative_text": "The room is dark."}
+{"morphology": "antonym", "concept_id": "hot_ant", "positive_text": "The water is hot.", "negative_text": "The water is cold."}
+{"morphology": "antonym", "concept_id": "big_ant", "positive_text": "The house is big.", "negative_text": "The house is small."}
+{"morphology": "antonym", "concept_id": "fast_ant", "positive_text": "The car is fast.", "negative_text": "The car is slow."}
+{"morphology": "antonym", "concept_id": "heavy_ant", "positive_text": "The box is heavy.", "negative_text": "The box is light."}
+{"morphology": "antonym", "concept_id": "alive_ant", "positive_text": "The tree is alive.", "negative_text": "The tree is dead."}
+{"morphology": "antonym", "concept_id": "rich_ant", "positive_text": "The merchant is rich.", "negative_text": "The merchant is poor."}
+{"morphology": "antonym", "concept_id": "strong_ant", "positive_text": "The hero is strong.", "negative_text": "The hero is weak."}

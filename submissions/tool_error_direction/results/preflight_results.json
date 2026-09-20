@@ -1,0 +1,15 @@
+{
+  "Salesforce/Llama-xLAM-2-8b-fc-r": {
+    "model_name": "Salesforce/Llama-xLAM-2-8b-fc-r",
+    "n_trajectories": 50,
+    "label_counts": {
+      "give-up": 35,
+      "retry-same": 13,
+      "modify-args": 2
+    },
+    "ambig_rate": 0.0,
+    "max_cache_diff": 0.0,
+    "passed_ambig": true,
+    "passed_cache": true
+  }
+}

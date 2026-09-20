@@ -1,0 +1,178 @@
+%% caisc_2026.sty  — Conference For AI Scientists 2026
+%% Derived from agents4science 2025 / NeurIPS 2025 template.
+%% This file provides the macros required by the CAISc 2026 LaTeX template.
+%%
+%% Options:
+%%   (none)    — anonymous submission with line numbers
+%%   preprint  — non-anonymised, "Preprint." footer
+%%   final     — non-anonymised, "Published at CAISc 2026" footer
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{caisc_2026}[2026/04/14 CAISc 2026 Style]
+
+%% ── Option handling ──────────────────────────────────────────────────────────
+\newif\if@preprint  \@preprintfalse
+\newif\if@final     \@finalfalse
+\newif\if@nonatbib  \@nonatbibfalse
+\DeclareOption{preprint}{\@preprinttrue}
+\DeclareOption{final}{\@finaltrue}
+\DeclareOption{nonatbib}{\@nonatbibtrue}
+\ProcessOptions\relax
+
+%% ── Required packages ────────────────────────────────────────────────────────
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{etoolbox}
+\RequirePackage{lineno}
+\if@nonatbib\else
+  \RequirePackage{natbib}
+\fi
+
+%% ── Page geometry (US Letter, NeurIPS-style) ─────────────────────────────────
+\geometry{
+  letterpaper,
+  top=1in, bottom=1in,
+  left=1.5in, right=1in,
+  headheight=14pt,
+  headsep=10pt,
+  footskip=24pt
+}
+
+%% ── Times font ───────────────────────────────────────────────────────────────
+\RequirePackage{times}
+\RequirePackage[T1]{fontenc}
+
+%% ── Line spacing and paragraph style ────────────────────────────────────────
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.5pt}
+
+%% ── Section headings ─────────────────────────────────────────────────────────
+\RequirePackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries}{\theparagraph}{0em}{}[~~~]
+
+%% ── Abstract environment ─────────────────────────────────────────────────────
+\renewenvironment{abstract}{%
+  \vspace{0.5\baselineskip}
+  \begin{center}{\large\bfseries Abstract}\end{center}
+  \begin{quotation}\small
+}{%
+  \end{quotation}
+  \vspace{0.5\baselineskip}
+}
+
+%% ── Acknowledgements environment (hidden in submission) ──────────────────────
+\newenvironment{ack}{%
+  \if@preprint
+    \section*{Acknowledgements}
+  \else\if@final
+    \section*{Acknowledgements}
+  \else
+    % anonymous submission: hide ack
+    \comment
+  \fi\fi
+}{%
+  \if@preprint\else\if@final\else\endcomment\fi\fi
+}
+% \comment / \endcomment require verbatim package for the hide trick;
+% simpler: use a boolean
+\let\ack\relax \let\endack\relax
+\newenvironment{ack}{%
+  \if@final\section*{Acknowledgements}\else
+  \if@preprint\section*{Acknowledgements}\else
+  \setbox0=\vbox\bgroup
+  \fi\fi
+}{%
+  \if@final\else\if@preprint\else\egroup\fi\fi
+}
+
+%% ── Footer text ──────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\if@final
+  \fancyfoot[C]{\small Published at 1st Conference For AI Scientists (CAISc 2026).}
+\else\if@preprint
+  \fancyfoot[C]{\small Preprint.}
+\else
+  \fancyfoot[C]{\small Submitted to 1st Conference For AI Scientists (CAISc 2026). Do not distribute.}
+\fi\fi
+\fancyfoot[R]{\small\thepage}
+
+%% ── Line numbers (submission mode only) ─────────────────────────────────────
+\if@preprint\else\if@final\else
+  \linenumbers
+\fi\fi
+
+%% ── Title and author ─────────────────────────────────────────────────────────
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\LARGE\bfseries \@title \par}
+    \vspace{0.5\baselineskip}
+    \if@preprint
+      {\large \@author \par}
+    \else\if@final
+      {\large \@author \par}
+    \else
+      {\large Anonymous Author(s) \par}
+    \fi\fi
+  \end{center}
+  \vspace{\baselineskip}
+}
+
+%% ── Natbib style ─────────────────────────────────────────────────────────────
+%% Note: \bibliographystyle must be set in the paper .tex, not here,
+%% to avoid the "another \bibstyle command" BibTeX error.
+\if@nonatbib\else
+  \setcitestyle{authoryear,open={(},close={)}}
+\fi
+
+%% ── Colours for checklist macros ─────────────────────────────────────────────
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{darkorange}{rgb}{0.8, 0.4, 0.0}
+\definecolor{darkblue}{rgb}{0.0, 0.2, 0.7}
+\definecolor{darkred}{rgb}{0.7, 0.0, 0.0}
+\definecolor{darkgray}{rgb}{0.35, 0.35, 0.35}
+
+%% ── AI Involvement level macros ──────────────────────────────────────────────
+\newcommand{\involvementA}{{\color{darkgreen}\textbf{[A]}}}
+\newcommand{\involvementB}{{\color{darkorange}\textbf{[B]}}}
+\newcommand{\involvementC}{{\color{darkblue}\textbf{[C]}}}
+\newcommand{\involvementD}{{\color{darkred}\textbf{[D]}}}
+\newcommand{\involvementTODO}{{\color{darkgray}\textbf{[TODO]}}}
+
+%% ── Iteration effort macros ──────────────────────────────────────────────────
+\newcommand{\iterationLow}{{\color{darkgreen}\textit{[Low]}}}
+\newcommand{\iterationMedium}{{\color{darkorange}\textit{[Medium]}}}
+\newcommand{\iterationHigh}{{\color{darkred}\textit{[High]}}}
+\newcommand{\iterationNA}{{\color{darkgray}\textit{[N/A]}}}
+\newcommand{\iterationUnclear}{{\color{darkgray}\textit{[Unclear]}}}
+\newcommand{\iterationTODO}{{\color{darkgray}\textit{[TODO]}}}
+
+%% ── Justification placeholder ────────────────────────────────────────────────
+\newcommand{\justificationTODO}{{\color{darkgray}\textit{[TODO: provide justification]}}}
+
+%% ── Checklist answer macros ──────────────────────────────────────────────────
+\newcommand{\answerYes}{{\color{darkgreen}\textbf{Yes}}}
+\newcommand{\answerNo}{{\color{darkred}\textbf{No}}}
+\newcommand{\answerNA}{{\color{darkgray}\textbf{N/A}}}
+\newcommand{\answerTODO}{{\color{darkgray}\textbf{[TODO]}}}
+
+%% ── Hyperref setup ───────────────────────────────────────────────────────────
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{
+      colorlinks=true,
+      linkcolor=darkblue,
+      citecolor=darkblue,
+      urlcolor=darkblue
+    }
+  }{}%
+}
+
+\endinput

@@ -1,0 +1,26 @@
+{
+  "morphologies": {
+    "antonym": 8,
+    "contraction": 5,
+    "fails_to": 3,
+    "false_that": 5,
+    "never": 5,
+    "not": 10,
+    "quantifier_no": 5
+  },
+  "not_nonneg_controls": 15,
+  "train_morphologies": [
+    "not",
+    "contraction",
+    "never",
+    "quantifier_no",
+    "false_that",
+    "fails_to"
+  ],
+  "test_morphologies": [
+    "antonym"
+  ],
+  "design_principle": "Train d_neg on morphologies using 'not'-derived markers (not, contraction, never, quantifier_no, false_that, fails_to). Test on antonym pairs (NO 'not' token). Strong transfer to antonyms = logical-negation signal. Weak transfer = signal is just 'not' token presence.",
+  "confound_control": "not_nonneg pairs contain 'not' but NOT as a propositional-negation operator ('not only X but Y', 'not surprisingly...'). A logical-NOT direction should show small activation on these. A 'not-token-detector' direction should show large activation.",
+  "total_main_pairs": 41
+}

@@ -1,0 +1,42 @@
+%% AI Involvement Checklist — Paper 3: Withholding Without Lying
+%% Required for CAISc 2026 submission.
+
+\section*{AI Involvement Checklist}
+
+\subsection*{Research Stage Assessment}
+
+\begin{enumerate}
+
+\item \textbf{Idea Generation.}
+\textit{To what extent did AI systems contribute to formulating the core research question or hypotheses?} \\
+\textbf{High.} The core question (does sandbagging leave a mechanistic activation signature?) originated with the human researcher. Claude (via FleetView / Claude Code) co-developed the five-condition confound-controlled experimental design---specifically the B vs.\ A$'$ contrast isolating persona content from system-prompt presence---and the project-out causal experiment.
+
+\item \textbf{Experiment Design.}
+\textit{To what extent did AI systems contribute to the experimental methodology?} \\
+\textbf{High.} The five-condition design (A, A$'$, B, C, C2) was co-developed with Claude to isolate the sandbagging signal from system-prompt confounds. The causal project-out approach (rather than ablation or addition) was proposed by AI assistance to test whether the probe direction is causally upstream of generation behaviour.
+
+\item \textbf{Code Implementation.}
+\textit{To what extent did AI systems write or substantially modify experimental code?} \\
+\textbf{High.} All experimental scripts (dataset construction, activation extraction, probing, direction extraction, refusal geometry, causal recovery, plotting) were written by Claude (FleetView) in an agentic coding session. The human researcher reviewed, directed, and approved all code.
+
+\item \textbf{Data Analysis and Interpretation.}
+\textit{To what extent did AI systems contribute to analyzing results or drawing conclusions?} \\
+\textbf{Medium.} Numerical analysis and figure generation were automated. The interpretation of the null causal recovery result---framing it as ``informational but not steerable'' rather than as a failure---was developed jointly. The implication (activation detection is feasible; causal modulation is not) was identified in collaboration.
+
+\subsection*{AI System Documentation}
+
+\item \textbf{AI Systems Used.}
+\begin{itemize}
+  \item \textit{Coding and experiment orchestration:} Claude (Anthropic), accessed via FleetView / Claude Code agentic environment.
+  \item \textit{Critical review:} GPT-5 (OpenAI), used in hostile-reviewer mode for critique of claims.
+  \item \textit{Background research:} Gemini 2.5 Pro (Google), used for literature review assistance.
+\end{itemize}
+
+\item \textbf{Limitations and Failure Modes of AI Assistance.}
+\begin{itemize}
+  \item The original experimental design did not include the A$'$ (helpful system prompt) condition. AI assistance flagged the system-prompt confound during design review, and the condition was added.
+  \item The AUROC 1.0 result was initially framed as a straightforward positive finding. Human review flagged the layer-0 perfect separation as potentially trivial (due to different input tokens), prompting the more careful interpretational framing in Section~\ref{sec:res_probe}.
+  \item The sandbagging leakage rate (78\% of sandbagging responses contain the correct answer) was identified as a finding in itself only after AI-human joint review; initial framing treated it only as a limitation.
+\end{itemize}
+
+\end{enumerate}

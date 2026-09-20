@@ -1,0 +1,13 @@
+{
+  "n_total_generations": 123,
+  "n_positives_raw": 121,
+  "n_positives_with_positions": 121,
+  "n_negatives_matched": 2,
+  "n_controls": 121,
+  "marker_distribution": {
+    "hmm": 112,
+    "actually": 1,
+    "wait": 8
+  },
+  "timestamp": "2026-05-28 03:52:37"
+}

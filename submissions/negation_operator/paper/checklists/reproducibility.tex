@@ -1,0 +1,58 @@
+%% Reproducibility and Responsibility Checklist — Paper 2: Is Negation an Operator?
+%% Required for CAISc 2026 submission.
+
+\section*{Reproducibility and Responsibility Checklist}
+
+\subsection*{Reproducibility}
+
+\begin{enumerate}
+
+\item \textbf{Model and Code.}
+\textit{Are the model weights and experimental code publicly available or will they be released?} \\
+\textbf{Yes.} The base model (\texttt{deepseek-ai/DeepSeek-R1-Distill-Qwen-7B}) is publicly available via Hugging Face under the DeepSeek license. All experimental code---pair construction, activation extraction, SVD analysis, causal steering, and figure generation---will be released as a public repository upon acceptance.
+
+\item \textbf{Dataset Availability.}
+\textit{Are the datasets used or constructed available?} \\
+\textbf{Yes (constructed dataset).} The paired-prompt dataset was constructed programmatically from templates listed in Appendix~\ref{app:data}. All 56 pairs (33 logical-negation training pairs across 6 morphologies, 8 antonym test pairs, and 15 not\_nonneg control pairs) can be regenerated exactly from the released code. No proprietary or licensed text corpora were used.
+
+\item \textbf{Computing Requirements.}
+\textit{What computational resources are required to reproduce the experiments?} \\
+A single consumer GPU with $\geq$24\,GB VRAM (e.g., NVIDIA RTX 6000 Ada or RTX 3090/4090) is sufficient. The full pipeline (activation extraction through figure generation) runs in under 2 hours. Specific requirements: CUDA 12.8+, Python 3.11, PyTorch 2.11, TransformerLens 3.2.1, Transformers 5.9.0. A \texttt{requirements.txt} with pinned versions is provided in the released repository.
+
+\item \textbf{Hyperparameters and Random Seeds.}
+\textit{Are all hyperparameters and random seeds fully specified?} \\
+\textbf{Yes.} The pipeline is deterministic: SVD has no random initialization, and the random-direction baseline uses a fixed seed (42). Directions are extracted by SVD on per-morphology mean-centered activation deltas (there is no learned probe). The causal steering experiment uses a fixed hook at \texttt{blocks.5.hook\_resid\_post}, sweeping $\alpha \in \{-2, -1, -0.5, 0, 0.5, 1, 2\}$ times $\alpha_{\mathrm{unit}}$ (mean residual norm $\approx$552 at layer 5). Full hyperparameter listings are provided in Appendix~\ref{app:impl}.
+
+\item \textbf{Statistical Testing.}
+\textit{Are statistical tests and confidence intervals reported?} \\
+\textbf{Partially.} Primary results (explained variance ratios, transfer cosines) are reported as single deterministic values from the full dataset (56 pairs) with no subsampling. The alpha sweep (Figure~\ref{fig:steer}) reports mean absolute logit shifts against a random-direction baseline (10 random unit vectors, $\pm 1\sigma$). No bootstrap confidence intervals or p-values are reported; effect sizes are the primary reported statistic, consistent with the plan's ``soft hypothesis'' discipline.
+
+\item \textbf{Reproducibility Scope.}
+\textit{Which claims in the paper are empirically supported, and are there any that are based on intuition or informal reasoning?} \\
+All quantitative claims in Sections~\ref{sec:results} and~\ref{sec:discussion} are directly derived from the experimental pipeline. We explicitly do \emph{not} claim a predicate--quantifier ``opposite poles'' distinction: because SVD singular-vector signs are arbitrary, the data show only collinearity, as discussed in Section~\ref{sec:discussion}.
+
+\end{enumerate}
+
+\subsection*{Responsibility}
+
+\begin{enumerate}
+\setcounter{enumi}{6}
+
+\item \textbf{Dual-Use Risks.}
+\textit{Could the methods or findings be misused?} \\
+\textbf{Low risk.} The negation steering direction identified here is a research tool for understanding model representations. Applying it as a steering vector requires white-box model access (weights + residual stream hooks), which is not available to typical API users. The direction itself is not trivially weaponizable: applying it modifies semantic polarity in a diffuse way rather than enabling targeted harmful content. We see no immediate misuse vector, and note that linear steering directions of this type are already widely studied in the mechanistic interpretability literature.
+
+\item \textbf{Limitations Acknowledged.}
+\textit{Are the paper's limitations discussed openly?} \\
+\textbf{Yes.} Section~\ref{sec:discussion} acknowledges: (a) single model studied; (b) $\alpha_{\mathrm{unit}} \approx 552$ is large relative to typical steering amplitudes in the literature; (c) logit-shift metric measures behavioral tendency, not semantic correctness; (d) the confound-controlled test covers 6 syntactic morphologies but may not exhaust all negation surface forms; (e) the quantifier negation finding is interpreted but not formally modeled.
+
+\item \textbf{Broader Impacts.}
+\textit{Are broader societal impacts considered?} \\
+Understanding how negation is represented in LLMs contributes to model interpretability and can inform future work on detecting when a model is reasoning correctly about logical structure. There are no specific negative societal impacts anticipated from this work. The findings are purely empirical and mechanistic.
+
+\item \textbf{Human Subjects / Privacy.}
+\textit{Does the study involve human participants or personal data?} \\
+\textbf{No.} All data consists of model-generated activations from programmatically constructed prompts. No human subjects are involved. No personal or private data is used or generated.
+
+\end{enumerate}
+
